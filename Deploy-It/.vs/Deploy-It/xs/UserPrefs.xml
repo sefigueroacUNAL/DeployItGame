@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{2CEA585A-CDE5-40EF-9A90-9765C31683A3}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyResources.cs">
+    <Files>
+      <File FileName="Assets/Scripts/CardController.cs" Line="35" Column="49" />
+      <File FileName="Assets/Scripts/Card.cs" Line="11" Column="28" />
+      <File FileName="Assets/Scripts/DPCard.cs" Line="11" Column="20" />
+      <File FileName="Assets/Scripts/MyResources.cs" Line="7" Column="13" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
