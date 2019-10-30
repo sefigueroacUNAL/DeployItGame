@@ -10,6 +10,7 @@ public class DPCard : Card {
 	void Start () {
 
         textType = "DeployMent Package";
+        icon = MyResources.DP_SPRITE_ICON;
 	}
 	
 	// Update is called once per frame

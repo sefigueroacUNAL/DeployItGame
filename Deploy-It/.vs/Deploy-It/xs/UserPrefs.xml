@@ -4,7 +4,7 @@
     <Files>
       <File FileName="Assets/Scripts/CardController.cs" Line="35" Column="49" />
       <File FileName="Assets/Scripts/Card.cs" Line="11" Column="28" />
-      <File FileName="Assets/Scripts/DPCard.cs" Line="11" Column="20" />
+      <File FileName="Assets/Scripts/DPCard.cs" Line="11" Column="1" />
       <File FileName="Assets/Scripts/MyResources.cs" Line="7" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>

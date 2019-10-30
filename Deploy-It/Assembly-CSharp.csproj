@@ -63,11 +63,11 @@
     <Compile Include="Assets\Scripts\CardController.cs" />
     <Compile Include="Assets\Scripts\DPCard.cs" />
     <Compile Include="Assets\Scripts\MyResources.cs" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/SFIGUEROA90/Documents/UnityProjects/Deploy-It/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/SFIGUEROA90/Documents/UnityProjects/Deploy-It/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

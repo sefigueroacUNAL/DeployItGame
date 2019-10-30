@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 [ExecuteInEditMode]
 public class CardController : MonoBehaviour {
@@ -32,7 +33,11 @@ public class CardController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        Debug.Log("Icon path:" + AssetDatabase.LoadAllAssetsAtPath("Assets/Images/ICONS.png")[1].name);
+
         card = (Card)FindObjectOfType<DPCard>();
+
 	}
 	
 	// Update is called once per frame
