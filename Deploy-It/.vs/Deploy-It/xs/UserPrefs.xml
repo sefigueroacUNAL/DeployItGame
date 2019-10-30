@@ -1,11 +1,14 @@
 ﻿<Properties StartupConfiguration="{2CEA585A-CDE5-40EF-9A90-9765C31683A3}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyResources.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GenerateDeck.cs">
     <Files>
-      <File FileName="Assets/Scripts/CardController.cs" Line="35" Column="49" />
-      <File FileName="Assets/Scripts/Card.cs" Line="11" Column="28" />
-      <File FileName="Assets/Scripts/DPCard.cs" Line="11" Column="1" />
-      <File FileName="Assets/Scripts/MyResources.cs" Line="7" Column="13" />
+      <File FileName="Assets/Scripts/CardController.cs" Line="22" Column="5" />
+      <File FileName="Assets/Scripts/Card.cs" Line="20" Column="3" />
+      <File FileName="Assets/Scripts/DPCard.cs" Line="17" Column="9" />
+      <File FileName="Assets/Scripts/MyResources.cs" Line="21" Column="47" />
+      <File FileName="Assets/Scripts/BPCard.cs" Line="5" Column="27" />
+      <File FileName="Assets/Scripts/GPCard.cs" Line="17" Column="1" />
+      <File FileName="Assets/Scripts/GenerateDeck.cs" Line="8" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

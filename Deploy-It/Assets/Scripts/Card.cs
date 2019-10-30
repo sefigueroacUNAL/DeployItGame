@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Card : MonoBehaviour {
 
+
     //Input fields
-    public int colorType;
+    public enum ColorType { GENERIC, PM, SI, IT };
+    ColorType colorType;
     public Color viewcolor;
     public string textType;
     public string textInfo;
+    public string textSubInfo;
     public Sprite icon;
     public Font font;
 

@@ -14,6 +14,13 @@ public class MyResources : MonoBehaviour{
     //#1155ccff
     public static Color SI_COLOR = new Color(0x11, 0x55, 0xcc);
 
+
+    public static string DP_TEXT = "Deployment Package";
+    public static string GP_TEXT = "Good Practice";
+    public static string BP_TEXT = "Bad Practice";
+    public static string EVENT_TEXT = "Event";
+
+
     public static string DP_PM_TEXT = "Project Management Process";
     public static string DP_IT_TEXT = "Highly Iterative Software Process";
     public static string DP_GENERIC_TEXT = "Highly Iterative Software Process";
@@ -53,7 +60,19 @@ public class MyResources : MonoBehaviour{
                                         ";
 
 
+    public static string BP_GENERIC_TEXT = @"Algo no está bien";
 
+    public static string EVENT_SW_QUALITY_EVENTS = "Software Quality Events";
+    public static string EVENT_SW_QUALITY_EVENTS_SUB = "Interchage DP";
+
+    public static string EVENT_ATTRACT_GOOD_EMPLOYEES = "Attract Good Employees";
+    public static string EVENT_ATTRACT_GOOD_EMPLOYEES_SUB = "Get DP from the others VSE";
+
+    public static string EVENT_COMPETITION_BAD_PRACTICES = "Competitions Adopts Bad Practices";
+    public static string EVENT_COMPETITION_BAD_PRACTICES_SUB = "Bad practices for the others.";
+
+    public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT = "Software process Improvemet";
+    public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB = "You are one step ahead. Other VSE may change discart their cards";
 
 
     static Sprite[] sprites = (Sprite[])AssetDatabase.LoadAllAssetsAtPath("Assets/Images/ICONS.png");
