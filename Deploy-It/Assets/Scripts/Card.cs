@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card : MonoBehaviour {
+public class Card  {
 
 
     //Input fields
     public enum ColorType { GENERIC, PM, SI, IT };
-    ColorType colorType;
+    public ColorType colorType;
     public Color viewcolor;
     public string textType;
     public string textInfo;
     public string textSubInfo;
-    public Sprite icon;
-    public Font font;
+    public int icon;
+    public int font;
+    public Object where;
 
 	// Use this for initialization
 	void Start () {
@@ -24,4 +25,8 @@ public class Card : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    override public string  ToString(){
+        return string.Format("Card: [ colorType:{0}, textInfo{1},textType{2} ]", colorType, textInfo, textType); 
+    }
 }

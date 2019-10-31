@@ -13,20 +13,27 @@ public class CardController : MonoBehaviour {
 
     //Card GUI items
     public Text textTypeUI;
-    public Image bgImage;
+    public Button bgImage;
     public Image iconImage;
     public Text textInfoUI;
     public Text textSubInfoUI;
 
     public bool autoUpdate = false;
 
+    public Sprite[] sprites;
 
+    public Font[] fonts;
+ 
+    public void SetGraphics(){
 
-    void SetGraphics(){
-        
-        bgImage.color = card.viewcolor;
-        iconImage.sprite = card.icon;
-        textInfoUI.font = card.font;
+        ColorBlock colorBlock = bgImage.colors;
+        colorBlock.normalColor = card.viewcolor;
+        colorBlock.highlightedColor = card.viewcolor;
+        //colorBlock.pressedColor = card.viewcolor;
+        //colorBlock.disabledColor = card.viewcolor;
+        bgImage.colors = colorBlock;
+        iconImage.sprite = sprites[card.icon];
+        textInfoUI.font = fonts[card.font];
         textInfoUI.text = card.textInfo;
         textTypeUI.text = card.textType;
         textSubInfoUI.text = card.textSubInfo;
@@ -36,7 +43,6 @@ public class CardController : MonoBehaviour {
         else
             textSubInfoUI.fontSize = 12;
     }
-
 
 	// Use this for initialization
 	void Start () {

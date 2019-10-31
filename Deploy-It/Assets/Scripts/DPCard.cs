@@ -13,25 +13,40 @@ public class DPCard: Card {
     {
         this.colorType = colorType;
         textType = MyResources.DP_TEXT;
-        icon = MyResources.PM_SPRITE_ICON;
+        font = MyResources.DP_TEXT_FONT;
+        icon = MyResources.BP_SPRITE_ICON;
+       
+
+       
 
         switch(colorType){
-            case col:
-                textInfo = MyResources.BP_GENERIC_TEXT;
+            
+            case ColorType.GENERIC:
+                textInfo = MyResources.DP_GENERIC_TEXT;
                 viewcolor = MyResources.GENERIC_COLOR;
+                icon = MyResources.GENERIC_SPRITE_ICON;
                 break;
-            case 1: 
-                textInfo = MyResources.BP_PM_TEXT;
-                viewcolor = MyResources.PM_COLOR;
-                break;
-            case 2:
-                textInfo = MyResources.BP_SI_TEXT;
 
+            case ColorType.PM: 
+                textInfo = MyResources.DP_PM_TEXT;
+                viewcolor = MyResources.PM_COLOR;
+                icon = MyResources.PM_SPRITE_ICON;
                 break;
-            case 3:
-                textInfo = MyResources.BP_IT_TEXT;
+
+            case ColorType.SI:
+                textInfo = MyResources.DP_SI_TEXT;
+                viewcolor = MyResources.SI_COLOR;
+                icon = MyResources.SI_SPRITE_ICON;
+                break;
+
+            case ColorType.IT:
+                textInfo = MyResources.DP_IT_TEXT;
+                viewcolor = MyResources.IT_COLOR;
+                icon = MyResources.SI_SPRITE_ICON;
                 break;
         }
+
+        Debug.Log("DP GENERATED:" + (Card)this);
     }
 
     //Input field

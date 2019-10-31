@@ -161,13 +161,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f2e3c53ed3a41969b5b0b1f6a2da91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 0}
   textTypeUI: {fileID: 114236499049618372}
-  bgImage: {fileID: 114796530038608034}
+  bgImage: {fileID: 114488370761359910}
   iconImage: {fileID: 114553808616424784}
   textInfoUI: {fileID: 114834977534268644}
   textSubInfoUI: {fileID: 114620594886044320}
-  autoUpdate: 1
+  autoUpdate: 0
+  sprites:
+  - {fileID: 21300168, guid: 68911840436034048b1882c8141edec1, type: 3}
+  - {fileID: 21300086, guid: 68911840436034048b1882c8141edec1, type: 3}
+  - {fileID: 21300106, guid: 68911840436034048b1882c8141edec1, type: 3}
+  - {fileID: 21300108, guid: 68911840436034048b1882c8141edec1, type: 3}
+  - {fileID: 21300118, guid: 68911840436034048b1882c8141edec1, type: 3}
+  - {fileID: 21300112, guid: 68911840436034048b1882c8141edec1, type: 3}
+  - {fileID: 21300168, guid: 68911840436034048b1882c8141edec1, type: 3}
+  fonts:
+  - {fileID: 12800000, guid: b8ecafa0c411d484d9243a3499d4e678, type: 3}
+  - {fileID: 12800000, guid: 966965fd208374dd1b51b436dc1bffed, type: 3}
+  - {fileID: 12800000, guid: d0ee69afc81e94484a730631911591e3, type: 3}
+  - {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &114236499049618372
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,10 +308,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.9339623, g: 0.013216423, b: 0.41834465, a: 1}
-    m_HighlightedColor: {r: 0.93333334, g: 0.011764706, b: 0.41960785, a: 0.72156864}
-    m_PressedColor: {r: 0.8584906, g: 0.17412782, b: 0.23367514, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.53333336}
+    m_NormalColor: {r: 1, g: 0, b: 0.44255304, a: 1}
+    m_HighlightedColor: {r: 0.22574759, g: 0.27560407, b: 0.5377358, a: 1}
+    m_PressedColor: {r: 1, g: 0.9764151, b: 0.97874445, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -311,7 +323,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 114796530038608034}
   m_OnClick:
     m_PersistentCalls:
@@ -417,14 +429,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
