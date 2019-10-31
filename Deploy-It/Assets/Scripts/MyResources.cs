@@ -14,9 +14,13 @@ public class MyResources : MonoBehaviour{
     //#1155ccff
     public static Color SI_COLOR = new Color32(0x11, 0x55, 0xcc, 0xFF);
 
-    public static string NO_PLAYERS_SELECTED = "You have not setted the players";
-    public static string NO_PLAYERS_SELECTED_INFO = "You should set at least two VSE's.\nCheck the VSE that you want to select and write their names.";
+    public static int CARDS_BY_HAND = 3;
 
+    public static string NO_PLAYERS_SELECTED = "You have not setted the players";
+    public static string NO_PLAYERS_SELECTED_INFO = "You should set at least two VSE's.\n\nCheck the VSE that you want to select and write their names.";
+
+    public static string GAME_WILL_START = "Game will start";
+    public static string GAME_WILL_START_SUB = "The game is about to start";
 
     public static string DP_TEXT = "Deployment Package";
     public static string GP_TEXT = "Good Practice";

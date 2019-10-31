@@ -8,15 +8,26 @@ public class MainController : MonoBehaviour {
 
     State state = State.INTRO;
 
+    public Message message;
+
+    public IntroScreen introScreen;
+
     public CardController currentCard;
 
     public List<string> players;
-    List<Hand> hands;
-    List<VSEGoals> VSEGoals;
 
     public CardController[] cardControllers;
 
-    Deck deck;
+    public Transform prefabPanel;
+
+    public Transform playersPanel;
+
+    List<Hand> hands;
+    List<VSEGoals> VSEsGoals;
+
+
+
+    public Deck deck;
    
 
     void SetState(State newState){
@@ -33,17 +44,34 @@ public class MainController : MonoBehaviour {
                 deck.GenerateListModel();
                 deck.GenerateRandomSort();
                 hands.Clear();
-                VSEGoals.Clear();
+                VSEsGoals.Clear();
                 foreach(string vse in players){
                     hands.Add(new Hand(vse));
+                    VSEGoals vseGoals = Instantiate(prefabPanel, playersPanel).GetComponent<VSEGoals>();
+                    vseGoals.SetName(vse);
+                    VSEsGoals.Add(vseGoals);
 
                 }
+                message.SetTitle(MyResources.GAME_WILL_START);
+                message.SetText(MyResources.GAME_WILL_START_SUB);
+                message.ShowMessage();
+                WaitForSeconds(1f, () => { introScreen.gameObject.SetActive(false); });
+
+
 
                 break;
         }
     }
 
-   
+    void WaitForSeconds(float time, System.Action action){
+        StartCoroutine(WaitForSecondsCoroutine(time, action));
+        //Helper function to wait;
+      
+    }
+    IEnumerator WaitForSecondsCoroutine(float time, System.Action action){
+        yield return new WaitForSeconds(time);
+        action();
+    }
 
     void OnStarted(List<string> newPlayers){
         Debug.Log("Game has started with players:" + newPlayers);
@@ -72,7 +100,7 @@ public class MainController : MonoBehaviour {
 	void Start () {
 
         hands = new List<Hand>();
-        VSEGoals = new List<VSEGoals>();
+        VSEsGoals = new List<VSEGoals>();
 
         GetAllCardControllers();
         SetCardControllersListeners();

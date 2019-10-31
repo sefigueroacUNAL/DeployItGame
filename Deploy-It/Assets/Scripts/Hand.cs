@@ -5,7 +5,7 @@ using UnityEngine;
 public class Hand{
 
     string playerName;
-    List<Card> cards;
+    public List<Card> cards;
 
     public Hand(string playerName){
         this.playerName = playerName;

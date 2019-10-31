@@ -7,11 +7,18 @@ public class VSEGoals : MonoBehaviour {
 
     List<DPCard> DPCards;
 
-    RectTransform mainPanel;
+    public Text VSENameUI;
 
-    RectTransform DPPanels;
+    public RectTransform mainPanel;
 
-    string VSEName;
+    public RectTransform[] DPPanels;
+
+    public string VSEName;
+
+    public void SetName(string playerName){
+        VSEName = playerName;
+        VSENameUI.text = VSEName;
+    }
 
 	// Use this for initialization
 	void Start () {

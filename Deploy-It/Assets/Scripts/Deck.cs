@@ -80,7 +80,7 @@ public class Deck : MonoBehaviour {
 
     Random random = new Random();
     public void GenerateRandomSort(){
-
+        randomCards = new List<Card>();
         while (cards.Count > 0){
             int val = Random.Range(0, cards.Count);
             randomCards.Add(cards[val]);

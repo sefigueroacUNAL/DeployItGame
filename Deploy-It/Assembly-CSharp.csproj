@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\MainController.cs" />
     <Compile Include="Assets\Scripts\Message.cs" />
     <Compile Include="Assets\Scripts\MyResources.cs" />
+    <Compile Include="Assets\Scripts\Utils.cs" />
     <Compile Include="Assets\Scripts\VSEGoals.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
