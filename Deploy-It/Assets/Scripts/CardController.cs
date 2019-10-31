@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEditor;
 
 [ExecuteInEditMode]
-public class CardController : MonoBehaviour {
+public class CardController : MonoBehaviour , IPointerEnterHandler {
 
 
     //Input fields
@@ -20,10 +22,19 @@ public class CardController : MonoBehaviour {
 
     public bool autoUpdate = false;
 
+    delegate  void OnCardPointerEnter();
+
     public Sprite[] sprites;
 
     public Font[] fonts;
- 
+
+    public UnityEvent cardPointerEnter;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        cardPointerEnter.Invoke(); 
+    }
+
     public void SetGraphics(){
 
         ColorBlock colorBlock = bgImage.colors;
@@ -42,7 +53,10 @@ public class CardController : MonoBehaviour {
             textSubInfoUI.fontSize = 0;
         else
             textSubInfoUI.fontSize = 12;
-        }
+    }
+
+   
+
 
 	// Use this for initialization
 	void Start () {

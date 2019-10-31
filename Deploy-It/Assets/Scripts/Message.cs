@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -20,7 +19,7 @@ public class Message : MonoBehaviour, IPointerClickHandler {
     public float transitionTime = 0.3f;
 
 
-
+   
 
     public void SetTitle(string title){
         this.title = title;
@@ -91,6 +90,7 @@ public class Message : MonoBehaviour, IPointerClickHandler {
 
     public void OnPointerClick(PointerEventData eventData)
     {
+       
         Debug.Log("Pointer Clicked");
         if (showed)
             HideMessage(transitionTime);

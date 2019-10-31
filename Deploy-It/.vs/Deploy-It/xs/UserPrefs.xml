@@ -1,21 +1,22 @@
 ﻿<Properties StartupConfiguration="{2CEA585A-CDE5-40EF-9A90-9765C31683A3}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CardController.cs">
     <Files>
-      <File FileName="Assets/Scripts/CardController.cs" Line="16" Column="8" />
+      <File FileName="Assets/Scripts/CardController.cs" Line="8" Column="44" />
       <File FileName="Assets/Scripts/Card.cs" Line="14" Column="31" />
       <File FileName="Assets/Scripts/DPCard.cs" Line="7" Column="50" />
-      <File FileName="Assets/Scripts/MyResources.cs" Line="21" Column="77" />
+      <File FileName="Assets/Scripts/MyResources.cs" Line="17" Column="41" />
       <File FileName="Assets/Scripts/BPCard.cs" Line="13" Column="39" />
       <File FileName="Assets/Scripts/GPCard.cs" Line="12" Column="6" />
       <File FileName="Assets/Scripts/GenerateDeck.cs" Line="29" Column="16" />
-      <File FileName="Assets/Scripts/Deck.cs" Line="83" Column="40" />
+      <File FileName="Assets/Scripts/Deck.cs" Line="11" Column="5" />
       <File FileName="Assets/Scripts/EVCard.cs" Line="33" Column="23" />
-      <File FileName="Assets/Scripts/MainController.cs" Line="66" Column="4" />
+      <File FileName="Assets/Scripts/MainController.cs" Line="134" Column="13" />
       <File FileName="Assets/Scripts/VSEGoals.cs" Line="25" Column="9" />
-      <File FileName="Assets/Scripts/Hand.cs" Line="12" Column="34" />
-      <File FileName="Assets/Scripts/HandController.cs" Line="10" Column="25" />
-      <File FileName="Assets/Scripts/Utils.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Hand.cs" Line="7" Column="12" />
+      <File FileName="Assets/Scripts/HandController.cs" Line="31" Column="6" />
+      <File FileName="Assets/Scripts/Utils.cs" Line="7" Column="93" />
+      <File FileName="Assets/Scripts/Message.cs" Line="7" Column="59" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

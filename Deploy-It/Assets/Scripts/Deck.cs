@@ -8,6 +8,8 @@ public class Deck : MonoBehaviour {
 
     public List<Card> randomCards = null;
 
+
+
     int DPCardsByType = 5;
     int DPCardsGeneric = 1;
     int GPCardsByType = 4;
