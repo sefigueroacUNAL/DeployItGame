@@ -159,17 +159,21 @@ public class MainController : MonoBehaviour {
         currentCard.SetGraphics();
     }
 
-    void SelectCardInHand(CardController cardController){
-        foreach( CardController cController in handController.cardControllers)
+    void SelectCardInHand(CardController cardController)
+    {
+
+        if (!cardController.selected)
         {
-            if( cardController == cController){
-                cardController.transform.localScale = 1.3f * initCardScale;
-            }else{
-                cController.transform.localScale = initCardScale;
-            }
+            cardController.transform.localScale = 1.3f * initCardScale;
+            cardController.selected = true;
         }
-       
+        else
+        {
+            cardController.transform.localScale = initCardScale;
+            cardController.selected = false;
+        }
     }
+
 
 	// Use this for initialization
 	void Start () {

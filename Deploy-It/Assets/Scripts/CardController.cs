@@ -19,6 +19,7 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
     public Image iconImage;
     public Text textInfoUI;
     public Text textSubInfoUI;
+    public bool selected = false;
 
     public bool autoUpdate = false;
 
