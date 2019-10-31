@@ -59,8 +59,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MainController.cs" />
-    <Compile Include="Assets\Message.cs" />
     <Compile Include="Assets\Scripts\BPCard.cs" />
     <Compile Include="Assets\Scripts\Card.cs" />
     <Compile Include="Assets\Scripts\CardController.cs" />
@@ -70,7 +68,13 @@
     <Compile Include="Assets\Scripts\EventCard.cs" />
     <Compile Include="Assets\Scripts\GenerateDeck.cs" />
     <Compile Include="Assets\Scripts\GPCard.cs" />
+    <Compile Include="Assets\Scripts\Hand.cs" />
+    <Compile Include="Assets\Scripts\HandController.cs" />
+    <Compile Include="Assets\Scripts\IntroScreen.cs" />
+    <Compile Include="Assets\Scripts\MainController.cs" />
+    <Compile Include="Assets\Scripts\Message.cs" />
     <Compile Include="Assets\Scripts\MyResources.cs" />
+    <Compile Include="Assets\Scripts\VSEGoals.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

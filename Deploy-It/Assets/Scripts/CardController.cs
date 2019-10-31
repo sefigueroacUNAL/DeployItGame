@@ -42,7 +42,7 @@ public class CardController : MonoBehaviour {
             textSubInfoUI.fontSize = 0;
         else
             textSubInfoUI.fontSize = 12;
-    }
+        }
 
 	// Use this for initialization
 	void Start () {

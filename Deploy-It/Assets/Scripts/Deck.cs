@@ -6,6 +6,8 @@ public class Deck : MonoBehaviour {
 
     public List<Card> cards = null;
 
+    public List<Card> randomCards = null;
+
     int DPCardsByType = 5;
     int DPCardsGeneric = 1;
     int GPCardsByType = 4;
@@ -74,6 +76,16 @@ public class Deck : MonoBehaviour {
 
 
         Debug.Log("Tota cards are" + cards.Count);
+    }
+
+    Random random = new Random();
+    public void GenerateRandomSort(){
+
+        while (cards.Count > 0){
+            int val = Random.Range(0, cards.Count);
+            randomCards.Add(cards[val]);
+            cards.RemoveAt(val);
+        }
     }
 
 	// Use this for initialization

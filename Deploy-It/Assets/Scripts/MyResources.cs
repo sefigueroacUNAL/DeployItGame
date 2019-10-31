@@ -14,6 +14,9 @@ public class MyResources : MonoBehaviour{
     //#1155ccff
     public static Color SI_COLOR = new Color32(0x11, 0x55, 0xcc, 0xFF);
 
+    public static string NO_PLAYERS_SELECTED = "You have not setted the players";
+    public static string NO_PLAYERS_SELECTED_INFO = "You should set at least two VSE's.\nCheck the VSE that you want to select and write their names.";
+
 
     public static string DP_TEXT = "Deployment Package";
     public static string GP_TEXT = "Good Practice";
@@ -100,6 +103,8 @@ No se hizo análisis inicial de requerimientos.
     public static int BP_TEXT_FONT = 2;
     public static int EV_TEXT_FONT = 0;
     public static int EV_SUBTEXT_FONT = 3;
+
+
 
 
 

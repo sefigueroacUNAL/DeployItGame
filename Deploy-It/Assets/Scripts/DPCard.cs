@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class DPCard: Card {
 
+    List<Card> affectingCards = new List<Card>();
+
     public  DPCard(){
         textType = MyResources.DP_TEXT;
         icon = MyResources.PM_SPRITE_ICON;
+
     }
 
     public DPCard(ColorType colorType)
