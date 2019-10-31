@@ -92,7 +92,7 @@ No se hizo análisis inicial de requerimientos.
 
     public static int GP_SPRITE_ICON = 4;//sprites[60];
     public static int BP_SPRITE_ICON =5;//(Sprite)sprites[57];
-    public static int EVENT_ICON = 7;//(Sprite)sprites[85];
+    public static int EVENT_ICON = 6;//(Sprite)sprites[85];
 
     public static int TYPETEXT_FONT = 0;
     public static int DP_TEXT_FONT = 1;
