@@ -40,6 +40,10 @@ public class MainController : MonoBehaviour
 
     public Button playButton;
 
+    public Button resetButton;
+
+    public 
+
     List<Hand> hands;
 
     List<VSEGoals> VSEsGoals;
@@ -76,6 +80,14 @@ public class MainController : MonoBehaviour
 
         switch (newState)
         {
+            case State.INTRO:
+                introScreen.gameObject.SetActive(true);
+
+                foreach(VSEGoals goals in VSEsGoals){
+                    Destroy(goals);
+                }
+                break;
+
             case State.SET_GAME:
 
                 deck.GenerateListModel();
@@ -172,13 +184,25 @@ public class MainController : MonoBehaviour
             case PlayingState.GET_CARDS:
                 GetCards();
                 currentPlayer = (currentPlayer + 1) % players.Count;
+                SetPlayingState(PlayingState.NEXT_PLAYER);
+                break;
+            case PlayingState.NEXT_PLAYER:
+                message.SetTitle("Next VSE is " + players[currentPlayer]);
+                message.SetText("");
+                message.ShowMessage();
                 SetPlayingState(PlayingState.SET_PLAYER);
                 break;
+
+        
         }
 
     }
 
     //EVENTS 
+
+    void OnResetClicked(){
+        SetState(State.INTRO);
+    }
 
     void OnStarted(List<string> newPlayers)
     {
@@ -419,6 +443,8 @@ public class MainController : MonoBehaviour
         hands = new List<Hand>();
         selectedCards = new List<CardController>();
         VSEsGoals = new List<VSEGoals>();
+        resetButton.onClick.AddListener(OnResetClicked);
+
 
         GetAllCardControllers();
         SetCardControllersListeners();
