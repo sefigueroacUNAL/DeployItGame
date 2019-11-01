@@ -20,6 +20,7 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
     public Text textInfoUI;
     public Text textSubInfoUI;
     public bool selected = false;
+    DPPanelController parent;
 
     public bool autoUpdate = false;
 
@@ -38,22 +39,29 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
 
     public void SetGraphics(){
 
-        ColorBlock colorBlock = bgImage.colors;
-        colorBlock.normalColor = card.viewcolor;
-        colorBlock.highlightedColor = card.viewcolor;
-        //colorBlock.pressedColor = card.viewcolor;
-        //colorBlock.disabledColor = card.viewcolor;
-        bgImage.colors = colorBlock;
-        iconImage.sprite = sprites[card.icon];
-        textInfoUI.font = fonts[card.font];
-        textInfoUI.text = card.textInfo;
-        textTypeUI.text = card.textType;
-        textSubInfoUI.text = card.textSubInfo;
+        if (card != null )
+        {
+            ColorBlock colorBlock = bgImage.colors;
+            colorBlock.normalColor = card.viewcolor;
+            colorBlock.highlightedColor = card.viewcolor;
+            //colorBlock.pressedColor = card.viewcolor;
+            //colorBlock.disabledColor = card.viewcolor;
+            bgImage.colors = colorBlock;
+            iconImage.sprite = sprites[card.icon];
+            textInfoUI.font = fonts[card.font];
+            textInfoUI.text = card.textInfo;
+            textTypeUI.text = card.textType;
+            textSubInfoUI.text = card.textSubInfo;
 
-        if (card.textSubInfo == "")
-            textSubInfoUI.fontSize = 0;
-        else
-            textSubInfoUI.fontSize = 12;
+            parent = GetComponentInParent<DPPanelController>();
+
+            if (card.textSubInfo == "")
+                textSubInfoUI.fontSize = 0;
+            else
+                textSubInfoUI.fontSize = 12;
+        }else{
+            textInfoUI.text = "NULL";
+        }
     }
 
    
@@ -62,8 +70,16 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
 	// Use this for initialization
 	void Start () {
 
+        bgImage.onClick.AddListener(CardClicked);
 	}
-	
+
+    void CardClicked(){
+        
+        Debug.Log("Card Clicked" + card);
+        if (parent != null){
+            parent.DPClick.Invoke();
+        }
+    }
 	// Update is called once per frame
 	void Update () {
 

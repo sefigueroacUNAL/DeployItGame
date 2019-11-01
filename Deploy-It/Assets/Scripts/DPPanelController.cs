@@ -43,4 +43,12 @@ public class DPPanelController : MonoBehaviour, IPointerClickHandler{
     {
 		
 	}
+
+    public DPCard GetDP(){
+        foreach(CardController cc in transform.GetComponentsInChildren<CardController>()){
+            if (cc.card is DPCard)
+                return (DPCard)cc.card;
+        }
+        return null;
+    }
 }

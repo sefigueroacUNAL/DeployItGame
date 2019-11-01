@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainController : MonoBehaviour {
+public class MainController : MonoBehaviour
+{
 
-    public enum State{ INTRO, SET_GAME, PLAYING, FIRST_WIN, END}
+    public enum State { INTRO, SET_GAME, PLAYING, FIRST_WIN, END }
 
-    public enum PlayingState { NONE,SET_PLAYER, WAIT_ACTIONS, DO_ACIONS, GET_CARDS, NEXT_PLAYER };
+    public enum PlayingState { NONE, SET_PLAYER, WAIT_ACTIONS, DO_ACIONS, GET_CARDS, NEXT_PLAYER };
 
     PlayingState playingState = PlayingState.NONE;
 
@@ -44,34 +45,39 @@ public class MainController : MonoBehaviour {
     List<VSEGoals> VSEsGoals;
 
     Vector3 initCardScale;
+
     Vector3 initDPScale;
 
     int totalCardsSelected;
 
     public Deck deck;
-  
-    void SetState(State newState){
-        if (this.state != newState){
+
+    void SetState(State newState)
+    {
+        if (this.state != newState)
+        {
             this.state = newState;
             OnStateChanged(this.state);
         }
     }
 
-    void SetPlayingState(PlayingState newPlayingState){
-        if (this.playingState != newPlayingState){
+    void SetPlayingState(PlayingState newPlayingState)
+    {
+        if (this.playingState != newPlayingState)
+        {
             this.playingState = newPlayingState;
             OnPlayingStateChanged(playingState);
 
         }
     }
 
-   
+    void OnStateChanged(State newState)
+    {
 
-    void OnStateChanged(State newState){
-
-        switch(newState){
+        switch (newState)
+        {
             case State.SET_GAME:
-                
+
                 deck.GenerateListModel();
                 deck.GenerateRandomSort();
                 hands.Clear();
@@ -83,36 +89,39 @@ public class MainController : MonoBehaviour {
                     Hand hand = new Hand(vse);
 
                     //Give Hands
-                  
-                        for (int i = 0; i < MyResources.CARDS_BY_HAND; i++)
-                        {
-                            Card card = deck.randomCards[0];
-                            hand.cards.Add(card);
-                            deck.randomCards.Remove(card);
-                        Debug.Log("Card:" + card.colorType + " Added to hand:" + p);
-                        }
 
-                        
+                    for (int i = 0; i < MyResources.CARDS_BY_HAND; i++)
+                    {
+                        Card card = deck.randomCards[0];
+                        hand.cards.Add(card);
+                        deck.randomCards.Remove(card);
+                        Debug.Log("Card:" + card.colorType + " Added to hand:" + p);
+                    }
+
+
                     hands.Add(hand);
                     VSEGoals vseGoals = Instantiate(prefabPanel, playersPanel).GetComponent<VSEGoals>();
                     vseGoals.SetName(vse);
                     VSEsGoals.Add(vseGoals);
-                        
-                        
+
+
                 }
 
                 initCardScale = handController.cardControllers[0].transform.localScale;
                 initDPScale = VSEsGoals[0].DPPanels[0].transform.localScale;
 
-                handController.cardControllers[0].bgImage.onClick.AddListener(delegate {
+                handController.cardControllers[0].bgImage.onClick.AddListener(delegate
+                {
                     SelectCardInHand(handController.cardControllers[0]);
                 });
 
-                handController.cardControllers[1].bgImage.onClick.AddListener(delegate {
+                handController.cardControllers[1].bgImage.onClick.AddListener(delegate
+                {
                     SelectCardInHand(handController.cardControllers[1]);
                 });
 
-                handController.cardControllers[2].bgImage.onClick.AddListener(delegate {
+                handController.cardControllers[2].bgImage.onClick.AddListener(delegate
+                {
                     SelectCardInHand(handController.cardControllers[2]);
                 });
 
@@ -124,7 +133,7 @@ public class MainController : MonoBehaviour {
                 message.SetText(MyResources.GAME_WILL_START_SUB);
                 message.ShowMessage();
 
-                Utils.WaitForSeconds(this,0.3f, () => { introScreen.gameObject.SetActive(false); });
+                Utils.WaitForSeconds(this, 0.3f, () => { introScreen.gameObject.SetActive(false); });
 
                 currentPlayer = 0;
 
@@ -134,15 +143,11 @@ public class MainController : MonoBehaviour {
         }
     }
 
-    void ResetDPPanels(){
-        foreach (VSEGoals goals in VSEsGoals)
-            foreach (DPPanelController panel in goals.DPPanels)
-                panel.UnHightLight();
-    }
+    void OnPlayingStateChanged(PlayingState newPlayingState)
+    {
 
-    void OnPlayingStateChanged(PlayingState newPlayingState){
-
-        switch( newPlayingState){
+        switch (newPlayingState)
+        {
             case PlayingState.SET_PLAYER:
                 //Load cards on current hand
                 totalCardsSelected = 0;
@@ -151,7 +156,7 @@ public class MainController : MonoBehaviour {
 
                 foreach (CardController cc in handController.cardControllers)
                     cc.transform.localScale = initCardScale;
-                
+
                 GetAllCardControllers();
                 SetCardControllersListeners();
                 selectedCards.Clear();
@@ -161,20 +166,22 @@ public class MainController : MonoBehaviour {
                 break;
 
             case PlayingState.DO_ACIONS:
-                
+
                 break;
 
             case PlayingState.GET_CARDS:
                 GetCards();
-                currentPlayer = (currentPlayer+1) % players.Count;
+                currentPlayer = (currentPlayer + 1) % players.Count;
                 SetPlayingState(PlayingState.SET_PLAYER);
                 break;
         }
-        
-    }
-   
 
-    void OnStarted(List<string> newPlayers){
+    }
+
+    //EVENTS 
+
+    void OnStarted(List<string> newPlayers)
+    {
         Debug.Log("Game has started with players:" + newPlayers);
         players = newPlayers;
 
@@ -184,57 +191,58 @@ public class MainController : MonoBehaviour {
 
     }
 
-    void OnDiscard(){
+    void OnDiscard()
+    {
         Debug.Log("Discarded Cards");
-        foreach (CardController cc in selectedCards){
+        foreach (CardController cc in selectedCards)
+        {
             hands[currentPlayer].cards.Remove(cc.card);
             deck.disposedCards.Add(cc.card);
         }
 
-
         SetPlayingState(PlayingState.GET_CARDS);
 
-
-
-
-    
     }
 
-    void GetCards(){
-        
-        while (hands[currentPlayer].cards.Count < MyResources.CARDS_BY_HAND 
-               && deck.randomCards.Count > 0){
-            Card card = deck.randomCards[0];
-            hands[currentPlayer].cards.Add(card);
-            deck.randomCards.Remove(card);
-        }
-    }
-
-    void GetAllCardControllers(){
-        cardControllers = FindObjectsOfType<CardController>();
-    }
-
-    void SetCardControllersListeners(){
-        foreach (CardController cardController in cardControllers)
+    void OnPanelClicked(DPPanelController dPPanel)
+    {
+        Debug.Log("PanelClicked" + dPPanel.name);
+        switch (playingState)
         {
-            //cardController.bgImage.onClick.AddListener(delegate { ShowCurrentCard(cardController.card); });
-            cardController.cardPointerEnter.AddListener(delegate { ShowCurrentCard(cardController.card); });
+
+            case PlayingState.DO_ACIONS:
+                if (dPPanel.isHighLight)
+                {
+                    foreach (CardController cc in selectedCards)
+                    {
+                        cc.selected = false;
+                        cc.transform.localScale = initCardScale;
+                        //cc.transform.parent = dPPanel.transform;
+
+                        hands[currentPlayer].cards.Remove(cc.card);
+
+                        CardController newCC = Instantiate(cc, dPPanel.transform);
+
+                        newCC.card = (Card)cc.card.Clone();
+                        newCC.SetGraphics();
+                        newCC.cardPointerEnter.AddListener(delegate
+                        {
+
+                            ShowCurrentCard(newCC.card);
+                        });
+
+                        totalCardsSelected--;
+                        //selectedCards.Remove(cc);
+                        cc.card = null;
+
+                    }
+                    handController.SetGraphics();
+                    selectedCards.Clear();
+                }
+                break;
         }
     }
 
-    void GetAllPanelControllers(){
-        panelControllers = FindObjectsOfType<DPPanelController>();
-    }
-
-    void SetAllPanelControllersListeners(){
-        foreach (DPPanelController dpp in panelControllers)
-            dpp.DPClick.AddListener(delegate { OnPanelClicked(dpp); });
-                   }
-
-    void ShowCurrentCard(Card card){
-        currentCard.card = card;
-        currentCard.SetGraphics();
-    }
 
     void SelectCardInHand(CardController cardController)
     {
@@ -257,50 +265,13 @@ public class MainController : MonoBehaviour {
         CheckPosibleActions();
     }
 
-    void OnPanelClicked(DPPanelController dPPanel){
-        Debug.Log("PanelClicked" + dPPanel.name);
-        switch(playingState){
-            case PlayingState.DO_ACIONS:
-                if (dPPanel.isHighLight){
-                    foreach (CardController cc in selectedCards)
-                    {
-                        cc.selected = false;
-                        cc.transform.localScale = initCardScale;
-                        //cc.transform.parent = dPPanel.transform;
-                       
-                        hands[currentPlayer].cards.Remove(cc.card);
-
-                        Instantiate(cc, dPPanel.transform);
-                        totalCardsSelected--;
-                        //selectedCards.Remove(cc);
-                       
-                    }
-                    handController.SetGraphics();
-                    selectedCards.Clear();
-                }
-                break;
-        }
-    }
-
-	// Use this for initialization
-	void Start () {
-
-        hands = new List<Hand>();
-        selectedCards = new List<CardController>();
-        VSEsGoals = new List<VSEGoals>();
-
-        GetAllCardControllers();
-        SetCardControllersListeners();
-	}
-
-
-
-    void CheckPosibleActions(){
+    void CheckPosibleActions()
+    {
 
         ResetDPPanels();
 
-
-        if (totalCardsSelected == 1){
+        if (selectedCards.Count == 1)
+        {
             //We should detect the type of card
             Card card = selectedCards[0].card;
 
@@ -312,11 +283,11 @@ public class MainController : MonoBehaviour {
             }
             else if (card is BPCard)
             {
-                Debug.Log("Card is BP");
+                BPAction(card);
             }
             else if (card is GPCard)
             {
-                Debug.Log("Card is GP");
+                GPAction(card);
             }
             else if (card is EVCard)
             {
@@ -324,11 +295,11 @@ public class MainController : MonoBehaviour {
             }
         }
 
-
     }
 
-    void DPAction(Card card){
-        
+    void DPAction(Card card)
+    {
+
         Debug.Log("Card is DP");
 
         DPCard dPCard = (DPCard)card;
@@ -361,10 +332,103 @@ public class MainController : MonoBehaviour {
         }
     }
 
-   
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    void BPAction(Card card)
+    {
+
+        foreach (VSEGoals goals in VSEsGoals)
+            foreach (DPPanelController dpp in goals.DPPanels)
+            {
+                DPCard dPCard = dpp.GetDP();
+                if (dPCard == null)
+                    continue;
+                else if (card.colorType == dpp.GetDP().colorType)
+                    dpp.HightLight();
+            }
+    }
+
+    void GPAction(Card card)
+    {
+
+        foreach (VSEGoals goals in VSEsGoals)
+            foreach (DPPanelController dpp in goals.DPPanels)
+            {
+                DPCard dPCard = dpp.GetDP();
+                if (dPCard == null)
+                    continue;
+                else if (card.colorType == dpp.GetDP().colorType)
+                    dpp.HightLight();
+            }
+    }
+                            
+
+    void ResetDPPanels()
+    {
+        foreach (VSEGoals goals in VSEsGoals)
+            foreach (DPPanelController panel in goals.DPPanels)
+                panel.UnHightLight();
+    }
+
+    void GetCards()
+    {
+
+        while (hands[currentPlayer].cards.Count < MyResources.CARDS_BY_HAND
+               && deck.randomCards.Count > 0)
+        {
+            Card card = deck.randomCards[0];
+            hands[currentPlayer].cards.Add(card);
+            deck.randomCards.Remove(card);
+        }
+    }
+
+    void GetAllCardControllers()
+    {
+        cardControllers = FindObjectsOfType<CardController>();
+    }
+
+    void SetCardControllersListeners()
+    {
+        foreach (CardController cardController in cardControllers)
+        {
+            //cardController.bgImage.onClick.AddListener(delegate { ShowCurrentCard(cardController.card); });
+            cardController.cardPointerEnter.AddListener(delegate { ShowCurrentCard(cardController.card); });
+        }
+    }
+
+    void GetAllPanelControllers()
+    {
+        panelControllers = FindObjectsOfType<DPPanelController>();
+    }
+
+    void SetAllPanelControllersListeners()
+    {
+        foreach (DPPanelController dpp in panelControllers)
+            dpp.DPClick.AddListener(delegate { OnPanelClicked(dpp); });
+    }
+
+    void ShowCurrentCard(Card card)
+    {
+        currentCard.card = card;
+        currentCard.SetGraphics();
+    }
+
+
+    // Use this for initialization
+    void Start()
+    {
+
+        hands = new List<Hand>();
+        selectedCards = new List<CardController>();
+        VSEsGoals = new List<VSEGoals>();
+
+        GetAllCardControllers();
+        SetCardControllersListeners();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+                             
+
 }

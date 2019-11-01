@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Card  {
+public class Card: ICloneable  {
 
 
     //Input fields
@@ -14,7 +15,7 @@ public class Card  {
     public string textSubInfo;
     public int icon;
     public int font;
-    public Object where;
+    public object where;
 
 	// Use this for initialization
 	void Start () {
@@ -28,5 +29,10 @@ public class Card  {
 
     override public string  ToString(){
         return string.Format("Card: [ colorType:{0}, textInfo{1},textType{2} ]", colorType, textInfo, textType); 
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
     }
 }
