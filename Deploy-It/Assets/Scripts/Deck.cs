@@ -8,6 +8,7 @@ public class Deck : MonoBehaviour {
 
     public List<Card> randomCards = null;
 
+    public List<Card> disposedCards = null;
 
 
     int DPCardsByType = 5;
@@ -24,6 +25,7 @@ public class Deck : MonoBehaviour {
     public void GenerateListModel()
     {
         cards = new List<Card>();
+        disposedCards = new List<Card>();
         Debug.Log("Will generate Cards");
 
         //DP Cards

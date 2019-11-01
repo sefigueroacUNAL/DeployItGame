@@ -11,7 +11,7 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
 
 
     //Input fields
-    public Card card;
+    public  Card card;
 
     //Card GUI items
     public Text textTypeUI;

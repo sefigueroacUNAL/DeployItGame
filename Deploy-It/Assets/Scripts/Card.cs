@@ -6,7 +6,7 @@ public class Card  {
 
 
     //Input fields
-    public enum ColorType { GENERIC, PM, SI, IT };
+    public enum ColorType { GENERIC=0, PM=1, SI=2, IT=3 };
     public ColorType colorType;
     public Color viewcolor;
     public string textType;

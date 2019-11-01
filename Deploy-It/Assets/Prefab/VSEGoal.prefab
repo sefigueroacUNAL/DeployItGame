@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222415438394205172}
   - component: {fileID: 114833064476878748}
   - component: {fileID: 114902440611460880}
+  - component: {fileID: 114864491872367326}
   m_Layer: 5
   m_Name: Panel1
   m_TagString: Untagged
@@ -40,6 +41,7 @@ GameObject:
   - component: {fileID: 222157016711444572}
   - component: {fileID: 114593123733686574}
   - component: {fileID: 114312956060681170}
+  - component: {fileID: 114341241217358006}
   m_Layer: 5
   m_Name: Panel3
   m_TagString: Untagged
@@ -58,6 +60,7 @@ GameObject:
   - component: {fileID: 222982941518754116}
   - component: {fileID: 114956672365128256}
   - component: {fileID: 114322834132086070}
+  - component: {fileID: 114022822307497410}
   m_Layer: 5
   m_Name: Panel2
   m_TagString: Untagged
@@ -96,6 +99,7 @@ GameObject:
   - component: {fileID: 222482863613280150}
   - component: {fileID: 114033296322201082}
   - component: {fileID: 114292662353034914}
+  - component: {fileID: 114371088172100408}
   m_Layer: 5
   m_Name: Panel0
   m_TagString: Untagged
@@ -134,11 +138,28 @@ MonoBehaviour:
   VSENameUI: {fileID: 114783673404242586}
   mainPanel: {fileID: 224855628294041828}
   DPPanels:
-  - {fileID: 224099012168604434}
-  - {fileID: 224013116384096394}
-  - {fileID: 224248411749573520}
-  - {fileID: 224994191644900326}
+  - {fileID: 114371088172100408}
+  - {fileID: 114864491872367326}
+  - {fileID: 114022822307497410}
+  - {fileID: 114341241217358006}
   VSEName: 
+--- !u!114 &114022822307497410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1430288407963770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c21171ae7c040ba8860a93c5fcd49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DPClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isHighLight: 0
 --- !u!114 &114033296322201082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -251,6 +272,40 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
+--- !u!114 &114341241217358006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1386351464036674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c21171ae7c040ba8860a93c5fcd49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DPClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isHighLight: 0
+--- !u!114 &114371088172100408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1642986258873006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c21171ae7c040ba8860a93c5fcd49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DPClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isHighLight: 0
 --- !u!114 &114593123733686574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,6 +442,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114864491872367326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1148123836117732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c21171ae7c040ba8860a93c5fcd49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DPClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  isHighLight: 0
 --- !u!114 &114902440611460880
 MonoBehaviour:
   m_ObjectHideFlags: 1

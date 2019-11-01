@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\CardController.cs" />
     <Compile Include="Assets\Scripts\Deck.cs" />
     <Compile Include="Assets\Scripts\DPCard.cs" />
+    <Compile Include="Assets\Scripts\DPPanelController.cs" />
     <Compile Include="Assets\Scripts\EVCard.cs" />
     <Compile Include="Assets\Scripts\EventCard.cs" />
     <Compile Include="Assets\Scripts\GenerateDeck.cs" />

@@ -7,6 +7,7 @@ public class Hand{
     public string playerName;
     public List<Card> cards;
 
+
     public Hand(string playerName){
         this.playerName = playerName;
         cards = new List<Card>();

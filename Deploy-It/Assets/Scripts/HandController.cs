@@ -21,7 +21,7 @@ public class HandController : MonoBehaviour {
         for (int i = 0; i < MyResources.CARDS_BY_HAND; i++){
             if (i < hand.cards.Count)
             {
-                cardControllers[i].card = hand.cards[i];
+                cardControllers[i].card =  hand.cards[i];
                 cardControllers[i].SetGraphics();
                 cardControllers[i].gameObject.SetActive(true);
             }else{

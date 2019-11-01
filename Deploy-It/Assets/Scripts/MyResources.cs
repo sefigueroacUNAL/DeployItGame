@@ -13,6 +13,11 @@ public class MyResources : MonoBehaviour{
     public static Color GENERIC_COLOR = new Color32(0xb4, 0xa7, 0xd6, 0xFF);
     //#1155ccff
     public static Color SI_COLOR = new Color32(0x11, 0x55, 0xcc, 0xFF);
+    //1C3733
+    public static Color ACTIONABLE_PANEL_COLOR = new Color32(0x00, 0x00, 0x00, 0xFF);
+
+    //FFFFFF
+    public static Color NORMAL_PANEL_COLOR = new Color32(0xFF, 0xFF, 0xFF, 0x0F);
 
     public static int CARDS_BY_HAND = 3;
 

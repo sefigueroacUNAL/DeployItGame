@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainController : MonoBehaviour {
 
@@ -22,24 +23,33 @@ public class MainController : MonoBehaviour {
 
     public CardController currentCard;
 
+    public List<CardController> selectedCards;
+
     public List<string> players;
 
     public CardController[] cardControllers;
+
+    public DPPanelController[] panelControllers;
 
     public Transform prefabPanel;
 
     public Transform playersPanel;
 
+    public Button discardButton;
+
+    public Button playButton;
+
     List<Hand> hands;
+
     List<VSEGoals> VSEsGoals;
 
     Vector3 initCardScale;
+    Vector3 initDPScale;
 
-
+    int totalCardsSelected;
 
     public Deck deck;
-   
-
+  
     void SetState(State newState){
         if (this.state != newState){
             this.state = newState;
@@ -54,6 +64,8 @@ public class MainController : MonoBehaviour {
 
         }
     }
+
+   
 
     void OnStateChanged(State newState){
 
@@ -85,9 +97,12 @@ public class MainController : MonoBehaviour {
                     VSEGoals vseGoals = Instantiate(prefabPanel, playersPanel).GetComponent<VSEGoals>();
                     vseGoals.SetName(vse);
                     VSEsGoals.Add(vseGoals);
+                        
+                        
                 }
 
                 initCardScale = handController.cardControllers[0].transform.localScale;
+                initDPScale = VSEsGoals[0].DPPanels[0].transform.localScale;
 
                 handController.cardControllers[0].bgImage.onClick.AddListener(delegate {
                     SelectCardInHand(handController.cardControllers[0]);
@@ -101,7 +116,9 @@ public class MainController : MonoBehaviour {
                     SelectCardInHand(handController.cardControllers[2]);
                 });
 
-              
+
+                GetAllPanelControllers();
+                SetAllPanelControllersListeners();
 
                 message.SetTitle(MyResources.GAME_WILL_START);
                 message.SetText(MyResources.GAME_WILL_START_SUB);
@@ -117,16 +134,40 @@ public class MainController : MonoBehaviour {
         }
     }
 
+    void ResetDPPanels(){
+        foreach (VSEGoals goals in VSEsGoals)
+            foreach (DPPanelController panel in goals.DPPanels)
+                panel.UnHightLight();
+    }
+
     void OnPlayingStateChanged(PlayingState newPlayingState){
 
         switch( newPlayingState){
             case PlayingState.SET_PLAYER:
                 //Load cards on current hand
+                totalCardsSelected = 0;
                 handController.hand = hands[currentPlayer];
                 handController.SetGraphics();
+
+                foreach (CardController cc in handController.cardControllers)
+                    cc.transform.localScale = initCardScale;
+                
                 GetAllCardControllers();
                 SetCardControllersListeners();
+                selectedCards.Clear();
+                ResetDPPanels();
+                SetPlayingState(PlayingState.DO_ACIONS);
 
+                break;
+
+            case PlayingState.DO_ACIONS:
+                
+                break;
+
+            case PlayingState.GET_CARDS:
+                GetCards();
+                currentPlayer = (currentPlayer+1) % players.Count;
+                SetPlayingState(PlayingState.SET_PLAYER);
                 break;
         }
         
@@ -138,8 +179,35 @@ public class MainController : MonoBehaviour {
         players = newPlayers;
 
         SetState(State.SET_GAME); //When checkstate is not on update this must be the last instrucion;
-       
 
+        discardButton.onClick.AddListener(OnDiscard);
+
+    }
+
+    void OnDiscard(){
+        Debug.Log("Discarded Cards");
+        foreach (CardController cc in selectedCards){
+            hands[currentPlayer].cards.Remove(cc.card);
+            deck.disposedCards.Add(cc.card);
+        }
+
+
+        SetPlayingState(PlayingState.GET_CARDS);
+
+
+
+
+    
+    }
+
+    void GetCards(){
+        
+        while (hands[currentPlayer].cards.Count < MyResources.CARDS_BY_HAND 
+               && deck.randomCards.Count > 0){
+            Card card = deck.randomCards[0];
+            hands[currentPlayer].cards.Add(card);
+            deck.randomCards.Remove(card);
+        }
     }
 
     void GetAllCardControllers(){
@@ -154,6 +222,15 @@ public class MainController : MonoBehaviour {
         }
     }
 
+    void GetAllPanelControllers(){
+        panelControllers = FindObjectsOfType<DPPanelController>();
+    }
+
+    void SetAllPanelControllersListeners(){
+        foreach (DPPanelController dpp in panelControllers)
+            dpp.DPClick.AddListener(delegate { OnPanelClicked(dpp); });
+                   }
+
     void ShowCurrentCard(Card card){
         currentCard.card = card;
         currentCard.SetGraphics();
@@ -166,26 +243,123 @@ public class MainController : MonoBehaviour {
         {
             cardController.transform.localScale = 1.3f * initCardScale;
             cardController.selected = true;
+            selectedCards.Add(cardController);
+            totalCardsSelected++;
         }
         else
         {
             cardController.transform.localScale = initCardScale;
             cardController.selected = false;
+            selectedCards.Remove(cardController);
+            totalCardsSelected--;
         }
+
+        CheckPosibleActions();
     }
 
+    void OnPanelClicked(DPPanelController dPPanel){
+        Debug.Log("PanelClicked" + dPPanel.name);
+        switch(playingState){
+            case PlayingState.DO_ACIONS:
+                if (dPPanel.isHighLight){
+                    foreach (CardController cc in selectedCards)
+                    {
+                        cc.selected = false;
+                        cc.transform.localScale = initCardScale;
+                        //cc.transform.parent = dPPanel.transform;
+                       
+                        hands[currentPlayer].cards.Remove(cc.card);
+
+                        Instantiate(cc, dPPanel.transform);
+                        totalCardsSelected--;
+                        //selectedCards.Remove(cc);
+                       
+                    }
+                    handController.SetGraphics();
+                    selectedCards.Clear();
+                }
+                break;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
 
         hands = new List<Hand>();
+        selectedCards = new List<CardController>();
         VSEsGoals = new List<VSEGoals>();
 
         GetAllCardControllers();
         SetCardControllersListeners();
 	}
 
-   
+
+
+    void CheckPosibleActions(){
+
+        ResetDPPanels();
+
+
+        if (totalCardsSelected == 1){
+            //We should detect the type of card
+            Card card = selectedCards[0].card;
+
+            discardButton.interactable = true;
+
+            if (card is DPCard)
+            {
+                DPAction(card);
+            }
+            else if (card is BPCard)
+            {
+                Debug.Log("Card is BP");
+            }
+            else if (card is GPCard)
+            {
+                Debug.Log("Card is GP");
+            }
+            else if (card is EVCard)
+            {
+                Debug.Log("Card is EV");
+            }
+        }
+
+
+    }
+
+    void DPAction(Card card){
+        
+        Debug.Log("Card is DP");
+
+        DPCard dPCard = (DPCard)card;
+        VSEGoals goals = VSEsGoals[currentPlayer];
+
+        switch (card.colorType)
+        {
+            case Card.ColorType.PM:
+                if (!goals.HasDP(0))
+                    goals.HighLight(0);
+                break;
+
+            case Card.ColorType.SI:
+                if (!goals.HasDP(1))
+                    goals.HighLight(1);
+                break;
+
+            case Card.ColorType.IT:
+                if (!goals.HasDP(2))
+                    goals.HighLight(2);
+                break;
+            case Card.ColorType.GENERIC:
+
+                foreach (DPPanelController panel in VSEsGoals[currentPlayer].DPPanels)
+                    if (!panel.HasDP())
+                        panel.HightLight();
+
+                break;
+
+        }
+    }
 
    
 	
