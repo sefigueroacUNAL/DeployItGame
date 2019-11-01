@@ -77,6 +77,7 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
         
         Debug.Log("Card Clicked" + card);
         if (parent != null){
+            
             parent.DPClick.Invoke();
         }
     }

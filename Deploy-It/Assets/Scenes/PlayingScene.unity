@@ -2877,7 +2877,8 @@ MonoBehaviour:
     type: 2}
   playersPanel: {fileID: 443350115}
   discardButton: {fileID: 1681386500}
-  playButton: {fileID: 0}
+  playButton: {fileID: 1470316990}
+  resetButton: {fileID: 538955842}
   deck: {fileID: 835016749}
 --- !u!1 &675504557
 GameObject:

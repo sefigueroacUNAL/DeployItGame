@@ -84,7 +84,7 @@ public class MainController : MonoBehaviour
                 introScreen.gameObject.SetActive(true);
 
                 foreach(VSEGoals goals in VSEsGoals){
-                    Destroy(goals);
+                    Destroy(goals.gameObject);
                 }
                 break;
 

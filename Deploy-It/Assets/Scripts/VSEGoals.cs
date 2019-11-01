@@ -17,8 +17,6 @@ public class VSEGoals : MonoBehaviour {
 
     public string VSEName;
 
-
-
     public void SetName(string playerName){
         VSEName = playerName;
         VSENameUI.text = VSEName;
