@@ -52,13 +52,26 @@ public class DPPanelController : MonoBehaviour, IPointerClickHandler{
         return null;
     }
 
-    public BPCard GetBP(){
+    public List<CardController> GetBPs(){
+        List<CardController> list = new List<CardController>();
         foreach (CardController cc in transform.GetComponentsInChildren<CardController>())
         {
             if (cc.card is BPCard)
-                return (BPCard)cc.card;
+                list.Add(cc);
         }
-        return null;
-        
+        return list;
     }
+
+    public List<CardController> GetGPs()
+    {
+        List<CardController> list = new List<CardController>();
+        foreach (CardController cc in transform.GetComponentsInChildren<CardController>())
+        {
+            if (cc.card is GPCard)
+                list.Add(cc);
+        }
+        return list;
+    }
+
+
 }

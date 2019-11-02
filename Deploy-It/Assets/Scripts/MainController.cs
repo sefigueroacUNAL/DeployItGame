@@ -86,14 +86,20 @@ public class MainController : MonoBehaviour
                 foreach(VSEGoals goals in VSEsGoals){
                     Destroy(goals.gameObject);
                 }
+
+                SetPlayingState(PlayingState.NONE);
                 break;
+
 
             case State.SET_GAME:
 
                 deck.GenerateListModel();
                 deck.GenerateRandomSort();
                 hands.Clear();
+                selectedCards.Clear();
                 VSEsGoals.Clear();
+
+
                 for (int p = 0; p < players.Count; p++)
                 {
                     string vse = players[p];
@@ -122,22 +128,17 @@ public class MainController : MonoBehaviour
                 initCardScale = handController.cardControllers[0].transform.localScale;
                 initDPScale = VSEsGoals[0].DPPanels[0].transform.localScale;
 
-                handController.cardControllers[0].bgImage.onClick.AddListener(delegate
+                foreach (CardController cc in handController.cardControllers)
                 {
-                    SelectCardInHand(handController.cardControllers[0]);
-                });
+                    cc.selected = false;
+                    cc.bgImage.onClick.AddListener(delegate
+                    {
+                        SelectCardInHand(cc);
 
-                handController.cardControllers[1].bgImage.onClick.AddListener(delegate
-                {
-                    SelectCardInHand(handController.cardControllers[1]);
-                });
+                    });
+                }
 
-                handController.cardControllers[2].bgImage.onClick.AddListener(delegate
-                {
-                    SelectCardInHand(handController.cardControllers[2]);
-                });
-
-
+             
                 GetAllPanelControllers();
                 SetAllPanelControllersListeners();
 
@@ -166,9 +167,11 @@ public class MainController : MonoBehaviour
                 handController.hand = hands[currentPlayer];
                 handController.SetGraphics();
 
-                foreach (CardController cc in handController.cardControllers)
+                foreach (CardController cc in handController.cardControllers){
                     cc.transform.localScale = initCardScale;
-
+                    cc.selected = false;
+                }
+                    
                 GetAllCardControllers();
                 SetCardControllersListeners();
                 selectedCards.Clear();
@@ -182,6 +185,14 @@ public class MainController : MonoBehaviour
                 break;
 
             case PlayingState.GET_CARDS:
+
+                if(CheckWinner()){
+                    
+                    message.SetTitle(players[currentPlayer] + MyResources.WINNER_TEXT_SUFIX);
+                    SetState(State.INTRO);
+                    return;
+                }
+
                 GetCards();
                 currentPlayer = (currentPlayer + 1) % players.Count;
                 SetPlayingState(PlayingState.NEXT_PLAYER);
@@ -193,7 +204,6 @@ public class MainController : MonoBehaviour
                 SetPlayingState(PlayingState.SET_PLAYER);
                 break;
 
-        
         }
 
     }
@@ -262,6 +272,8 @@ public class MainController : MonoBehaviour
                     }
                     handController.SetGraphics();
                     selectedCards.Clear();
+
+                    SetPlayingState(PlayingState.GET_CARDS);
                 }
                 break;
         }
@@ -365,7 +377,7 @@ public class MainController : MonoBehaviour
                 DPCard dPCard = dpp.GetDP();
                 if (dPCard == null)
                     continue;
-                else if (card.colorType == dpp.GetDP().colorType)
+            else if (card.colorType == dpp.GetDP().colorType || card.colorType == Card.ColorType.GENERIC)
                     dpp.HightLight();
             }
     }
@@ -379,7 +391,7 @@ public class MainController : MonoBehaviour
                 DPCard dPCard = dpp.GetDP();
                 if (dPCard == null)
                     continue;
-                else if (card.colorType == dpp.GetDP().colorType)
+            else if (card.colorType == dpp.GetDP().colorType || card.colorType == Card.ColorType.GENERIC )
                     dpp.HightLight();
             }
     }
@@ -402,6 +414,20 @@ public class MainController : MonoBehaviour
             hands[currentPlayer].cards.Add(card);
             deck.randomCards.Remove(card);
         }
+    }
+
+    bool CheckWinner(){
+        int AccomplishedDPP = 0;
+        //We count the number of Deployment Packages thar not unacomplished
+        foreach(DPPanelController dpp in VSEsGoals[currentPlayer].DPPanels){
+            if( dpp.HasDP() && dpp.GetGPs().Count == 0){
+                AccomplishedDPP++;
+            }
+        }
+        if (AccomplishedDPP == MyResources.TARGET_DP_NUMBER){
+            return true;
+        }
+        return false;
     }
 
     void GetAllCardControllers()
@@ -435,6 +461,15 @@ public class MainController : MonoBehaviour
         currentCard.SetGraphics();
     }
 
+    void CheckPanel(DPPanelController dPPanelController){
+
+        List<CardController> BPs;
+        List<CardController> GPs;
+
+        if (dPPanelController.GetBPs().Count == 1 && dPPanelController.GetGPs().Count == 1){
+            
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -445,7 +480,7 @@ public class MainController : MonoBehaviour
         VSEsGoals = new List<VSEGoals>();
         resetButton.onClick.AddListener(OnResetClicked);
 
-
+        introScreen.gameObject.SetActive(true);
         GetAllCardControllers();
         SetCardControllersListeners();
     }

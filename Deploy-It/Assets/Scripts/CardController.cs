@@ -78,7 +78,7 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
         Debug.Log("Card Clicked" + card);
         if (parent != null){
             
-            parent.DPClick.Invoke();
+            parent.DPClick.Invoke(); 
         }
     }
 	// Update is called once per frame

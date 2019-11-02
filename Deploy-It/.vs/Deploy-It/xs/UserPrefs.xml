@@ -11,13 +11,13 @@
       <File FileName="Assets/Scripts/GenerateDeck.cs" Line="29" Column="16" />
       <File FileName="Assets/Scripts/Deck.cs" Line="28" Column="42" />
       <File FileName="Assets/Scripts/EVCard.cs" Line="33" Column="23" />
-      <File FileName="Assets/Scripts/VSEGoals.cs" Line="17" Column="5" />
+      <File FileName="Assets/Scripts/VSEGoals.cs" Line="22" Column="34" />
       <File FileName="Assets/Scripts/Hand.cs" Line="14" Column="6" />
       <File FileName="Assets/Scripts/HandController.cs" Line="24" Column="43" />
       <File FileName="Assets/Scripts/Utils.cs" Line="17" Column="6" />
       <File FileName="Assets/Scripts/Message.cs" Line="83" Column="6" />
-      <File FileName="Assets/Scripts/DPPanelController.cs" Line="59" Column="36" />
-      <File FileName="Assets/Scripts/MainController.cs" Line="178" Column="12" />
+      <File FileName="Assets/Scripts/DPPanelController.cs" Line="71" Column="26" />
+      <File FileName="Assets/Scripts/MainController.cs" Line="445" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

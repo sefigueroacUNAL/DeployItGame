@@ -20,6 +20,10 @@ public class MyResources : MonoBehaviour{
     public static Color NORMAL_PANEL_COLOR = new Color32(0xFF, 0xFF, 0xFF, 0x0F);
 
     public static int CARDS_BY_HAND = 3;
+    public static int TARGET_DP_NUMBER = 3;
+
+    //Complete string is VSEName + "has accomplished all of the Deploy Ment Packages".
+    public static string WINNER_TEXT_SUFIX = "has accomplished all of the Deploy Ment Packages";
 
     public static string NO_PLAYERS_SELECTED = "You have not setted the players";
     public static string NO_PLAYERS_SELECTED_INFO = "You should set at least two VSE's.\n\nCheck the VSE that you want to select and write their names.";
@@ -112,10 +116,6 @@ No se hizo análisis inicial de requerimientos.
     public static int BP_TEXT_FONT = 2;
     public static int EV_TEXT_FONT = 0;
     public static int EV_SUBTEXT_FONT = 3;
-
-
-
-
 
 
 	// Use this for initialization
