@@ -23,7 +23,10 @@ public class MyResources : MonoBehaviour{
     public static int TARGET_DP_NUMBER = 3;
 
     //Complete string is VSEName + "has accomplished all of the Deploy Ment Packages".
-    public static string WINNER_TEXT_SUFIX = "has accomplished all of the Deploy Ment Packages";
+    public static string WINNER_TITLE_SUFIX = " has accomplished all of the Deploy Ment Packages";
+    public static string WINNER_TEXT_SUFIX = " is compliant with ISO/IEC 29110 Standard with the Entry Profile\n\n"
+        + "The next step for your VSE is to accomplish the Deployment Packages for the Basic Profile.";
+
 
     public static string NO_PLAYERS_SELECTED = "You have not setted the players";
     public static string NO_PLAYERS_SELECTED_INFO = "You should set at least two VSE's.\n\nCheck the VSE that you want to select and write their names.";

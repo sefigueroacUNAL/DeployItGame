@@ -92,6 +92,11 @@ public class Deck : MonoBehaviour {
         }
     }
 
+    void Clear(){
+        cards.Clear();
+        randomCards.Clear();
+        disposedCards.Clear();
+    }
 	// Use this for initialization
 	void Start () {
 		

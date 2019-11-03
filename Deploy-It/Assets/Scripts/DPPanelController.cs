@@ -13,6 +13,10 @@ public class DPPanelController : MonoBehaviour, IPointerClickHandler{
 
     public bool isHighLight;
 
+    public Card.ColorType colorType;
+
+    public bool isInmune = false;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         DPClick.Invoke();
@@ -36,6 +40,7 @@ public class DPPanelController : MonoBehaviour, IPointerClickHandler{
     // Use this for initialization
 	void Start () {
         image = GetComponent<Image>();
+        isInmune = false;
 	}
 	
 	// Update is called once per frame
@@ -43,6 +48,10 @@ public class DPPanelController : MonoBehaviour, IPointerClickHandler{
     {
 		
 	}
+
+    public CardController [] GetCards(){
+        return transform.GetComponentsInChildren<CardController>();
+    }
 
     public DPCard GetDP(){
         foreach(CardController cc in transform.GetComponentsInChildren<CardController>()){

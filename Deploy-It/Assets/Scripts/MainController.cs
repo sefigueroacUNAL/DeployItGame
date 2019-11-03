@@ -93,6 +93,9 @@ public class MainController : MonoBehaviour
 
             case State.SET_GAME:
 
+                GetAllCardControllers();
+                SetCardControllersListeners();
+
                 deck.GenerateListModel();
                 deck.GenerateRandomSort();
                 hands.Clear();
@@ -121,6 +124,10 @@ public class MainController : MonoBehaviour
                     VSEGoals vseGoals = Instantiate(prefabPanel, playersPanel).GetComponent<VSEGoals>();
                     vseGoals.SetName(vse);
                     VSEsGoals.Add(vseGoals);
+
+                    vseGoals.DPPanels[0].colorType = Card.ColorType.PM;
+                    vseGoals.DPPanels[1].colorType = Card.ColorType.SI;
+                    vseGoals.DPPanels[2].colorType = Card.ColorType.IT;
 
 
                 }
@@ -188,7 +195,9 @@ public class MainController : MonoBehaviour
 
                 if(CheckWinner()){
                     
-                    message.SetTitle(players[currentPlayer] + MyResources.WINNER_TEXT_SUFIX);
+                    message.SetTitle(players[currentPlayer] + MyResources.WINNER_TITLE_SUFIX);
+                    message.SetText(players[currentPlayer] + MyResources.WINNER_TEXT_SUFIX);
+                    message.ShowMessage();
                     SetState(State.INTRO);
                     return;
                 }
@@ -245,7 +254,7 @@ public class MainController : MonoBehaviour
         {
 
             case PlayingState.DO_ACIONS:
-                if (dPPanel.isHighLight)
+                if (dPPanel.isHighLight && !dPPanel.isInmune)
                 {
                     foreach (CardController cc in selectedCards)
                     {
@@ -275,6 +284,8 @@ public class MainController : MonoBehaviour
 
                     SetPlayingState(PlayingState.GET_CARDS);
                 }
+
+                CheckPanel(dPPanel); 
                 break;
         }
     }
@@ -375,12 +386,14 @@ public class MainController : MonoBehaviour
             foreach (DPPanelController dpp in goals.DPPanels)
             {
                 DPCard dPCard = dpp.GetDP();
-                if (dPCard == null)
-                    continue;
-            else if (card.colorType == dpp.GetDP().colorType || card.colorType == Card.ColorType.GENERIC)
+            if ((dpp.colorType == card.colorType || card.colorType == Card.ColorType.GENERIC) && dpp.HasDP()){
                     dpp.HightLight();
             }
+                
+            }
     }
+
+  
 
     void GPAction(Card card)
     {
@@ -388,11 +401,12 @@ public class MainController : MonoBehaviour
         foreach (VSEGoals goals in VSEsGoals)
             foreach (DPPanelController dpp in goals.DPPanels)
             {
-                DPCard dPCard = dpp.GetDP();
-                if (dPCard == null)
-                    continue;
-            else if (card.colorType == dpp.GetDP().colorType || card.colorType == Card.ColorType.GENERIC )
+               
+                if ((dpp.colorType == card.colorType || card.colorType == Card.ColorType.GENERIC) && dpp.HasDP())
+                {
                     dpp.HightLight();
+                }
+
             }
     }
                             
@@ -420,11 +434,12 @@ public class MainController : MonoBehaviour
         int AccomplishedDPP = 0;
         //We count the number of Deployment Packages thar not unacomplished
         foreach(DPPanelController dpp in VSEsGoals[currentPlayer].DPPanels){
-            if( dpp.HasDP() && dpp.GetGPs().Count == 0){
+            if( dpp.HasDP() && dpp.GetBPs().Count == 0){
                 AccomplishedDPP++;
             }
         }
         if (AccomplishedDPP == MyResources.TARGET_DP_NUMBER){
+            Debug.Log("We have a winner");
             return true;
         }
         return false;
@@ -465,10 +480,41 @@ public class MainController : MonoBehaviour
 
         List<CardController> BPs;
         List<CardController> GPs;
+        BPs = dPPanelController.GetBPs();
+        GPs = dPPanelController.GetGPs();
 
-        if (dPPanelController.GetBPs().Count == 1 && dPPanelController.GetGPs().Count == 1){
-            
+        //Bad and good practice
+        if (BPs.Count == 1 &&  GPs.Count == 1){
+            deck.disposedCards.Add((Card)BPs[0].card.Clone());
+            deck.disposedCards.Add((Card)GPs[0].card.Clone());
+
+            Destroy(BPs[0].gameObject);
+            Destroy(GPs[0].gameObject);
+
+            Debug.Log("Will destroy BP and GP");
+
         }
+
+        //Bad practice added to imunne
+        if(dPPanelController.isInmune && BPs.Count >= 1){
+            foreach(CardController cc in BPs){
+                deck.disposedCards.Add((Card)BPs[0].card.Clone());
+                Destroy(BPs[0].gameObject);
+            }
+        }
+
+        if(GPs.Count == 2 && BPs.Count == 0){
+            dPPanelController.isInmune = true;
+        }
+
+        if(BPs.Count == 2 && GPs.Count == 0){
+            foreach(CardController cc in dPPanelController.GetCards()){
+                deck.disposedCards.Add((Card)cc.card.Clone());
+                Destroy(cc);
+            }
+        }
+
+      
     }
 
     // Use this for initialization
@@ -481,8 +527,7 @@ public class MainController : MonoBehaviour
         resetButton.onClick.AddListener(OnResetClicked);
 
         introScreen.gameObject.SetActive(true);
-        GetAllCardControllers();
-        SetCardControllersListeners();
+       
     }
 
     // Update is called once per frame
