@@ -12,6 +12,7 @@ public class Message : MonoBehaviour, IPointerClickHandler {
     public Text titleUI;
     public Text infoTextUI;
 
+
     bool showed = true;
 
     public bool autoUpdate = false;
@@ -60,6 +61,15 @@ public class Message : MonoBehaviour, IPointerClickHandler {
         showed = true;
         Debug.Log("Showed Message");
 
+    }
+
+    public void ShowMessageTime(float showTime){
+        
+        ShowMessage(transitionTime);
+
+        Utils.WaitForSeconds(this,showTime,delegate {
+            HideMessage(transitionTime);
+        });
     }
    
 

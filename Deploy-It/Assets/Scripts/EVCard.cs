@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EVCard : Card {
 
-    public enum EventType {SW_QUALITY_EV,COMP_BP_EV,GOOD_EMP_EV,SPI_EV}
+    public enum EventType {NONE,SW_QUALITY_EV,COMP_BP_EV,GOOD_EMP_EV,SPI_EV}
     public EventType eventType;
 
-    public EVCard(EventType eventType){
-        this.eventType = eventType;
+    public EVCard(EventType newEventType){
+        eventType = newEventType;
 
         viewcolor = MyResources.GENERIC_COLOR;
         icon = MyResources.EVENT_ICON;

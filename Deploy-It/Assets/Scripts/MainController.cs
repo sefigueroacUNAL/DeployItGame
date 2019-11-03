@@ -16,9 +16,13 @@ public class MainController : MonoBehaviour
 
     public int currentPlayer = 0;
 
+    public EVCard.EventType currentEventType;
+
     public HandController handController;
 
     public Message message;
+
+    public Message smallMessage;
 
     public IntroScreen introScreen;
 
@@ -134,18 +138,7 @@ public class MainController : MonoBehaviour
 
                 initCardScale = handController.cardControllers[0].transform.localScale;
                 initDPScale = VSEsGoals[0].DPPanels[0].transform.localScale;
-
-                foreach (CardController cc in handController.cardControllers)
-                {
-                    cc.selected = false;
-                    cc.bgImage.onClick.AddListener(delegate
-                    {
-                        SelectCardInHand(cc);
-
-                    });
-                }
-
-             
+       
                 GetAllPanelControllers();
                 SetAllPanelControllersListeners();
 
@@ -178,11 +171,24 @@ public class MainController : MonoBehaviour
                     cc.transform.localScale = initCardScale;
                     cc.selected = false;
                 }
+
+                if(hands[currentPlayer].cards.Count == 0){
                     
+                    discardButton.GetComponentInChildren<Text>().text = MyResources.GET_CARDS_BUTTON_TEXT;
+                    message.SetTitle(MyResources.YOU_HAVE_NOT_CARDS_TITLE);
+                    message.SetText(MyResources.YOU_HAVE_NOT_CARDS_ACTION);
+                    message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
+
+                } else 
+                {
+                    discardButton.GetComponentInChildren<Text>().text = MyResources.DISCARD_BUTTON_TEXT;
+                }
+                currentEventType = EVCard.EventType.NONE;   
                 GetAllCardControllers();
                 SetCardControllersListeners();
                 selectedCards.Clear();
                 ResetDPPanels();
+                playButton.interactable = false;
                 SetPlayingState(PlayingState.DO_ACIONS);
 
                 break;
@@ -193,7 +199,7 @@ public class MainController : MonoBehaviour
 
             case PlayingState.GET_CARDS:
 
-                if(CheckWinner()){
+                if(ThereIsWinner()){
                     
                     message.SetTitle(players[currentPlayer] + MyResources.WINNER_TITLE_SUFIX);
                     message.SetText(players[currentPlayer] + MyResources.WINNER_TEXT_SUFIX);
@@ -206,10 +212,11 @@ public class MainController : MonoBehaviour
                 currentPlayer = (currentPlayer + 1) % players.Count;
                 SetPlayingState(PlayingState.NEXT_PLAYER);
                 break;
+
             case PlayingState.NEXT_PLAYER:
                 message.SetTitle("Next VSE is " + players[currentPlayer]);
                 message.SetText("");
-                message.ShowMessage();
+                message.ShowMessageTime(1f);
                 SetPlayingState(PlayingState.SET_PLAYER);
                 break;
 
@@ -222,6 +229,46 @@ public class MainController : MonoBehaviour
     void OnResetClicked(){
         SetState(State.INTRO);
     }
+
+    void OnPlayCardButtonClicked(){
+
+        message.SetTitle(MyResources.SPI_MESSAGE_TITLE);
+        message.SetText(MyResources.SPI_MESSAGE_TEXT);
+        message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
+
+        switch(currentEventType){
+            case EVCard.EventType.SPI_EV:
+                for (int i = 0; i < hands.Count; i++){
+                    if(i != currentPlayer){
+                        
+                        foreach(Card card in hands[i].cards){
+                            deck.disposedCards.Add(card);
+                        }
+                        hands[i].cards.Clear();
+                    }
+                }
+                break;
+            
+        }
+
+        DisposeSelectedCards();
+
+
+    }
+
+
+    void DisposeSelectedCards(){
+
+        foreach(CardController cc in selectedCards){
+            cc.transform.localScale = initCardScale;
+            deck.disposedCards.Add((Card)cc.card.Clone());
+            hands[currentPlayer].cards.Remove(cc.card);
+            cc.card = null;
+        }
+        
+      
+    }
+
 
     void OnStarted(List<string> newPlayers)
     {
@@ -316,6 +363,7 @@ public class MainController : MonoBehaviour
     {
 
         ResetDPPanels();
+        playButton.interactable = false;
 
         if (selectedCards.Count == 1)
         {
@@ -338,7 +386,7 @@ public class MainController : MonoBehaviour
             }
             else if (card is EVCard)
             {
-                Debug.Log("Card is EV");
+                EVAction(card);
             }
         }
 
@@ -409,6 +457,36 @@ public class MainController : MonoBehaviour
 
             }
     }
+
+    void EVAction(Card card){
+
+
+
+
+        Debug.Log("Card is EVAction");
+
+        EVCard eVCard = (EVCard)card;
+
+
+
+
+        Debug.Log("Card is EVAction with Event:" + currentEventType);
+
+        switch(eVCard.eventType){
+
+            case EVCard.EventType.SPI_EV:
+                playButton.interactable = true;
+                break;
+            case EVCard.EventType.COMP_BP_EV:
+                 
+                break;
+
+        }
+    }
+
+  
+
+
                             
 
     void ResetDPPanels()
@@ -430,7 +508,7 @@ public class MainController : MonoBehaviour
         }
     }
 
-    bool CheckWinner(){
+    bool ThereIsWinner(){
         int AccomplishedDPP = 0;
         //We count the number of Deployment Packages thar not unacomplished
         foreach(DPPanelController dpp in VSEsGoals[currentPlayer].DPPanels){
@@ -503,6 +581,7 @@ public class MainController : MonoBehaviour
             }
         }
 
+
         if(GPs.Count == 2 && BPs.Count == 0){
             dPPanelController.isInmune = true;
         }
@@ -510,9 +589,10 @@ public class MainController : MonoBehaviour
         if(BPs.Count == 2 && GPs.Count == 0){
             foreach(CardController cc in dPPanelController.GetCards()){
                 deck.disposedCards.Add((Card)cc.card.Clone());
-                Destroy(cc);
+                Destroy(cc.gameObject);
             }
         }
+
 
       
     }
@@ -525,6 +605,24 @@ public class MainController : MonoBehaviour
         selectedCards = new List<CardController>();
         VSEsGoals = new List<VSEGoals>();
         resetButton.onClick.AddListener(OnResetClicked);
+        playButton.onClick.AddListener(OnPlayCardButtonClicked);
+
+        message.gameObject.SetActive(true);
+        smallMessage.gameObject.SetActive(true);
+        smallMessage.HideMessage(0f);
+
+
+
+
+        foreach (CardController cc in handController.cardControllers)
+        {
+            cc.selected = false;
+            cc.bgImage.onClick.AddListener(delegate
+            {
+                SelectCardInHand(cc);
+
+            });
+        }
 
         introScreen.gameObject.SetActive(true);
        

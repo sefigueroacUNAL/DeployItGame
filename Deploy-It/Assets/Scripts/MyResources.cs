@@ -22,7 +22,7 @@ public class MyResources : MonoBehaviour{
     public static int CARDS_BY_HAND = 3;
     public static int TARGET_DP_NUMBER = 3;
 
-    //Complete string is VSEName + "has accomplished all of the Deploy Ment Packages".
+    //Complete string is VSEName + " has accomplished all of the Deploy Ment Packages".
     public static string WINNER_TITLE_SUFIX = " has accomplished all of the Deploy Ment Packages";
     public static string WINNER_TEXT_SUFIX = " is compliant with ISO/IEC 29110 Standard with the Entry Profile\n\n"
         + "The next step for your VSE is to accomplish the Deployment Packages for the Basic Profile.";
@@ -101,7 +101,13 @@ No se hizo análisis inicial de requerimientos.
     public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT = "Software process Improvemet";
     public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB = "You are one step ahead. Other VSE may change discart their cards";
 
+    public static string GET_CARDS_BUTTON_TEXT = "Get Cards";
+    public static string DISCARD_BUTTON_TEXT = "Discard";
+    public static string YOU_HAVE_NOT_CARDS_TITLE = "You have no cards.";
+    public static string YOU_HAVE_NOT_CARDS_ACTION = "Click on get Cards";
 
+    public static string SPI_MESSAGE_TITLE = "You are one step ahead.";
+    public static string SPI_MESSAGE_TEXT = "Other VSE's need more strategies";
     //static object[] sprites = AssetDatabase.LoadAllAssetsAtPath("Assets/Images/ICONS.png"); Does not compile.
 
     public static int PM_SPRITE_ICON = 0; //(Sprite)sprites[86];
@@ -119,6 +125,10 @@ No se hizo análisis inicial de requerimientos.
     public static int BP_TEXT_FONT = 2;
     public static int EV_TEXT_FONT = 0;
     public static int EV_SUBTEXT_FONT = 3;
+
+    public static float SHOW_MESSAGE_TIME = 1f;
+
+
 
 
 	// Use this for initialization

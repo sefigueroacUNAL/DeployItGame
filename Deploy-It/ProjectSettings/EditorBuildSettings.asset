@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GenerateDeck.unity
     guid: 28a2357e156014d0e8ee327abfc0e472
+  - enabled: 1
+    path: Assets/Scenes/PlayingScene.unity
+    guid: 9c6792eba415b468399df31fcff9dcde
   m_configObjects: {}
