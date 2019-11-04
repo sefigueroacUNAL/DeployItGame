@@ -1,0 +1,4 @@
+#Mon Nov 04 15:05:38 COT 2019
+base.0=/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Temp/gradleOut/build/intermediates/transforms/dex/release/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Temp/gradleOut/build/intermediates/transforms/dex/release/folders/1000/1f/main/classes.dex

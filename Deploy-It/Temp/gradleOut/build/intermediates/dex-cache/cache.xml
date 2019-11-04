@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Temp/gradleOut/libs/unity-classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.1"
+        sha1="1fe606101cdb82d4a24700b3b5a5dfe9581db921">
+        <dex dex="/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Deploy-It/Temp/gradleOut/build/intermediates/pre-dexed/release/unity-classes_acdc7419a464b0e425c264c8c0cb9d7d8ab909b5.jar" />
+    </item>
+
+</items>

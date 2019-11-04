@@ -238,6 +238,7 @@ public class MainController : MonoBehaviour
 
                 GetCards();
                 currentPlayer = (currentPlayer + 1) % players.Count;
+                CheckHands();
                 SetPlayingState(PlayingState.NEXT_PLAYER);
                 break;
 
@@ -617,7 +618,7 @@ public class MainController : MonoBehaviour
             totalCardsSelected--;
         }
 
-        if (selectedCards.Count > 0 && currentEventType == EVCard.EventType.NONE)
+        if (selectedCards.Count > 0)
         {
             discardButton.GetComponentInChildren<Text>().text = MyResources.DISCARD_BUTTON_TEXT;
 
