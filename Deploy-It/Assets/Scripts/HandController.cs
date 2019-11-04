@@ -14,6 +14,8 @@ public class HandController : MonoBehaviour {
 
     public CardController[] cardControllers;
 
+    public bool interactable; 
+
     public void SetGraphics(){
 
         SetName(hand.playerName);
@@ -23,6 +25,7 @@ public class HandController : MonoBehaviour {
             {
                 cardControllers[i].card =  hand.cards[i];
                 cardControllers[i].SetGraphics();
+                cardControllers[i].UnHighLight();
                 cardControllers[i].gameObject.SetActive(true);
             }else{
                 cardControllers[i].gameObject.SetActive(false);

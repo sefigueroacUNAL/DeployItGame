@@ -15,6 +15,7 @@ public class Card: ICloneable  {
     public string textSubInfo;
     public int icon;
     public int font;
+    public int subfont;
     public object where;
 
 	// Use this for initialization

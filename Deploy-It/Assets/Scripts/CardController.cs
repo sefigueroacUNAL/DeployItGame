@@ -54,13 +54,15 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
             textInfoUI.text = card.textInfo;
             textTypeUI.text = card.textType;
             textSubInfoUI.text = card.textSubInfo;
-
+            textSubInfoUI.font = fonts[card.subfont];
+            textSubInfoUI.fontSize = 22;
+            initScale = transform.localScale;
             parent = GetComponentInParent<DPPanelController>();
 
             if (card.textSubInfo == "")
                 textSubInfoUI.fontSize = 0;
             else
-                textSubInfoUI.fontSize = 12;
+                textSubInfoUI.fontSize = 22;
         }else{
             textInfoUI.text = "NULL";
         }
@@ -92,6 +94,7 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
     void CardClicked(){
         
         Debug.Log("Card Clicked" + card);
+        parent = GetComponentInParent<DPPanelController>();
         if (parent != null){
             
             parent.DPClick.Invoke(); 

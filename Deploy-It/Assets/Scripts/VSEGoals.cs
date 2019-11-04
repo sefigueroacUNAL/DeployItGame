@@ -42,6 +42,14 @@ public class VSEGoals : MonoBehaviour {
      
        
 	}
+
+    public bool HasDP(Card.ColorType colorType){
+        foreach(DPPanelController dpp in DPPanels){
+            if (dpp.colorType == colorType && dpp.HasDP())
+                return true;
+        }
+        return false;
+    }
 	
 	// Update is called once per frame
 	void Update () {

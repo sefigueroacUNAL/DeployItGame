@@ -45,6 +45,10 @@ public class MyResources : MonoBehaviour{
     public static string DP_GENERIC_TEXT = "Generic DP";
     public static string DP_SI_TEXT = "Software Implementation Process";
 
+    public static string NO_MORE_CARDS_TITLE = "Game is over";
+
+    public static string NO_MORE_CARDS_TEXT =  "There are not more cards in the deck.";
+
     public static string GP_PM_TEXT = 
         
 @"- Planeación.
@@ -102,6 +106,7 @@ No se hizo análisis inicial de requerimientos.
     public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB = "You are one step ahead. Other VSE may change discart their cards";
 
     public static string GET_CARDS_BUTTON_TEXT = "Get Cards";
+    public static string PASS_CARDS_BUTTON_TEXT = "Pass";
     public static string DISCARD_BUTTON_TEXT = "Discard";
     public static string YOU_HAVE_NOT_CARDS_TITLE = "You have no cards.";
     public static string YOU_HAVE_NOT_CARDS_ACTION = "Click on get Cards";
@@ -123,10 +128,10 @@ No se hizo análisis inicial de requerimientos.
     public static int DP_TEXT_FONT = 1;
     public static int GP_TEXT_FONT = 2;
     public static int BP_TEXT_FONT = 2;
-    public static int EV_TEXT_FONT = 0;
+    public static int EV_TEXT_FONT = 1;
     public static int EV_SUBTEXT_FONT = 3;
 
-    public static float SHOW_MESSAGE_TIME = 1f;
+    public static float SHOW_MESSAGE_TIME = 3f;
 
     public static float SCALE_FACTOR = 1.3f;
 

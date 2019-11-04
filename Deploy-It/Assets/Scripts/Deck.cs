@@ -11,11 +11,11 @@ public class Deck : MonoBehaviour {
     public List<Card> disposedCards = null;
 
 
-    int DPCardsByType = 5;
+    int DPCardsByType = 4;
     int DPCardsGeneric = 1;
-    int GPCardsByType = 4;
-    int GPCardsGeneric = 1;
-    int BPCardsByType = 4;
+    int GPCardsByType = 3;
+    int GPCardsGeneric = 3;
+    int BPCardsByType = 2;
     int BPCardsGeneric = 1;
     int EventCardsQSE = 2;
     int EventCardsGoodEmployees = 2;
@@ -68,7 +68,7 @@ public class Deck : MonoBehaviour {
         //GP Cards Generic
         for (int i = 0; i < BPCardsGeneric; i++)
         {
-            cards.Add(new GPCard(Card.ColorType.GENERIC));
+            cards.Add(new BPCard(Card.ColorType.GENERIC));
 
         }
 

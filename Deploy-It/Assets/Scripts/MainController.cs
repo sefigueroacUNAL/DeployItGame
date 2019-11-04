@@ -47,6 +47,8 @@ public class MainController : MonoBehaviour
 
     public CardController eventLastBPCard;
 
+    public DPPanelController selectedDP;
+
     public List<CardController> selectedCards;
 
     public List<string> players;
@@ -181,7 +183,9 @@ public class MainController : MonoBehaviour
             case PlayingState.SET_PLAYER:
                 //Load cards on current hand
                 totalCardsSelected = 0;
+                handController.interactable = true;
 
+                currentEventType = EVCard.EventType.NONE;
                 eventCompState = EventCompState.NONE;
                 eventGoodEmpState = EventGoodEmpState.NONE;
                 eventSwQualityState = EventSwQualityState.NONE;
@@ -203,7 +207,7 @@ public class MainController : MonoBehaviour
 
                 } else 
                 {
-                    discardButton.GetComponentInChildren<Text>().text = MyResources.DISCARD_BUTTON_TEXT;
+                    discardButton.GetComponentInChildren<Text>().text = MyResources.PASS_CARDS_BUTTON_TEXT;
                 }
                 currentEventType = EVCard.EventType.NONE;   
                 GetAllCardControllers();
@@ -222,7 +226,7 @@ public class MainController : MonoBehaviour
                 break;
 
             case PlayingState.GET_CARDS:
-                Debug.Log("We are in get cards state");
+                Debug.Log("We are in get cards state with player:" + currentPlayer);
                 if(ThereIsWinner()){
                     
                     message.SetTitle(players[currentPlayer] + MyResources.WINNER_TITLE_SUFIX);
@@ -256,19 +260,24 @@ public class MainController : MonoBehaviour
 
     void OnPlayCardButtonClicked(){
 
-       
+            discardButton.GetComponentInChildren<Text>().text = MyResources.PASS_CARDS_BUTTON_TEXT;
+        
+        handController.interactable = false;
+        foreach (CardController cc in handController.cardControllers) { cc.UnHighLight(); }
 
         switch(currentEventType){
             
             case EVCard.EventType.SPI_EV:
                 ClearOtherPlayersHands();
-                SetPlayingState(PlayingState.GET_CARDS);
+              
                 DisposeSelectedCards();
                 handController.SetGraphics();
 
                 message.SetTitle(MyResources.SPI_MESSAGE_TITLE);
                 message.SetText(MyResources.SPI_MESSAGE_TEXT);
                 message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
+
+                SetPlayingState(PlayingState.GET_CARDS);
 
                 break;
 
@@ -278,10 +287,6 @@ public class MainController : MonoBehaviour
                 DisposeSelectedCards();
                 handController.SetGraphics();
 
-                message.SetTitle(MyResources.SPI_MESSAGE_TITLE);
-                message.SetText(MyResources.SPI_MESSAGE_TEXT);
-                message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
-                //Highlight all DP
                 break;
 
             case EVCard.EventType.GOOD_EMP_EV:
@@ -293,16 +298,12 @@ public class MainController : MonoBehaviour
 
             case EVCard.EventType.SW_QUALITY_EV:
                 eventSwQualityState = EventSwQualityState.PLAYED;
-                HighLightOtherPlayersDP();
+                HighLightCurrentDPs();
                 DisposeSelectedCards();
                 handController.SetGraphics();
                 break;
             
         }
-
-       
-       
-
     }
 
     void HighLightOtherPlayersDP(){
@@ -317,6 +318,12 @@ public class MainController : MonoBehaviour
         }
     }
 
+    void HighLightCurrentDPs(){
+        foreach(DPPanelController dpp in VSEsGoals[currentPlayer].DPPanels){
+            if (dpp.HasDP()) dpp.HightLight();
+        }
+    }
+
     void HighLightPlayerBPs(){
         foreach (DPPanelController dpp in VSEsGoals[currentPlayer].DPPanels){
             if (dpp.GetBPs().Count > 0){
@@ -324,6 +331,7 @@ public class MainController : MonoBehaviour
             }
         }
     }
+
 
     void ShowMissingDPsInOthers(){
         for (int i = 0; i < VSEsGoals.Count; i++)
@@ -336,9 +344,10 @@ public class MainController : MonoBehaviour
                     }
                 }
             }
-        }
-        
+        }   
     }
+
+   
 
     void GetDP(DPPanelController dpp){
         DPCard dPCard = dpp.GetDP();
@@ -374,18 +383,33 @@ public class MainController : MonoBehaviour
         }
     }
 
+
+    void CheckHands(){
+        foreach(Hand hand in hands){
+            if(hand.cards.Count == 0){
+                message.SetTitle(MyResources.NO_MORE_CARDS_TITLE);
+                message.SetText(MyResources.NO_MORE_CARDS_TEXT);
+                SetState(State.INTRO);
+            }
+        }
+    }
+
     void DisposeSelectedCards(){
 
-        foreach(CardController cc in selectedCards){
-            cc.transform.localScale = initCardScale;
-            deck.disposedCards.Add((Card)cc.card.Clone());
-            hands[currentPlayer].cards.Remove(cc.card);
-          
-            cc.card = null;
-        }
+
+            foreach (CardController cc in selectedCards)
+            {
+                hands[currentPlayer].cards.Remove(cc.card);
+                deck.disposedCards.Add(cc.card);
+            }
+
+        handController.SetGraphics();
+
         
       
     }
+
+
 
 
     void OnStarted(List<string> newPlayers)
@@ -407,8 +431,10 @@ public class MainController : MonoBehaviour
             hands[currentPlayer].cards.Remove(cc.card);
             deck.disposedCards.Add(cc.card);
         }
-
-        SetPlayingState(PlayingState.GET_CARDS);
+        if (playingState == PlayingState.DO_ACIONS)
+        {
+            SetPlayingState(PlayingState.GET_CARDS);
+        }
 
     }
 
@@ -420,8 +446,6 @@ public class MainController : MonoBehaviour
 
             case PlayingState.DO_ACIONS:
 
-                 
-               
                 if (dPPanel.isHighLight && !dPPanel.isInmune)
                 {
                     
@@ -468,6 +492,27 @@ public class MainController : MonoBehaviour
                         break;
                     }
 
+                    if(eventSwQualityState == EventSwQualityState.PLAYED){
+
+                        ResetDPPanels();
+                        dPPanel.HightLight();
+                        selectedDP = dPPanel;
+                        eventSwQualityState = EventSwQualityState.SELECT_DP;
+                        HighLightPossibleDPs(selectedDP);
+                        return;
+                        break;
+                    }
+
+                    if(eventSwQualityState == EventSwQualityState.SELECT_DP){
+
+                        InterchangeDP(dPPanel,selectedDP);
+                        ResetDPPanels();
+                        eventSwQualityState = EventSwQualityState.NONE;
+                        SetPlayingState(PlayingState.GET_CARDS);
+                        return;
+
+                    }
+
                     foreach (CardController cc in selectedCards)
                     {
                         cc.selected = false;
@@ -501,9 +546,61 @@ public class MainController : MonoBehaviour
         }
     }
 
+    void HighLightPossibleDPs(DPPanelController dpp){
+
+        for (int j = 0; j < VSEsGoals.Count;j++)
+            for (int i = 0; i < VSEsGoals[j].DPPanels.Length;i++){
+                //Si yo yo tengo ese dp y el otro no tien el que yo tengo.
+                if (j == currentPlayer)
+                    break;
+                //Or if the panel has the color of the selected panel
+                DPPanelController curDpp = VSEsGoals[j].DPPanels[i];
+
+                if (curDpp.isInmune) continue;
+                if (!VSEsGoals[currentPlayer].HasDP(curDpp.colorType)
+                    && !VSEsGoals[j].HasDP(dpp.colorType) && curDpp.HasDP()
+                   || curDpp.colorType == dpp.colorType && curDpp.HasDP()
+                  ){
+                    VSEsGoals[j].DPPanels[i].HightLight();
+                }
+            }
+
+    }
+
+    void InterchangeDP(DPPanelController dpp1, DPPanelController dpp2){
+        
+        VSEGoals parent1 = dpp1.GetComponentInParent<VSEGoals>();
+        VSEGoals parent2 = dpp2.GetComponentInParent<VSEGoals>();
+
+        CardController[] p1Cards = dpp1.GetCards();
+        CardController[] p2Cards = dpp2.GetCards();
+
+        foreach(DPPanelController dpp in parent1.DPPanels){
+            //Dpp2 to dpp1
+            if( dpp.colorType == dpp2.colorType){
+                foreach (CardController cc in p2Cards)
+                    cc.transform.parent = dpp.transform;
+            }
+        }
+
+        foreach (DPPanelController dpp in parent2.DPPanels)
+        {
+            //Dpp2 to dpp1
+            if (dpp.colorType == dpp1.colorType)
+            {
+                foreach (CardController cc in p1Cards)
+                    cc.transform.parent = dpp.transform;
+            }
+        }
+    }
 
     void SelectCardInHand(CardController cardController)
     {
+
+
+        if(!handController.interactable){
+            return;
+        }
 
         if (!cardController.selected)
         {
@@ -518,6 +615,16 @@ public class MainController : MonoBehaviour
             cardController.selected = false;
             selectedCards.Remove(cardController);
             totalCardsSelected--;
+        }
+
+        if (selectedCards.Count > 0 && currentEventType == EVCard.EventType.NONE)
+        {
+            discardButton.GetComponentInChildren<Text>().text = MyResources.DISCARD_BUTTON_TEXT;
+
+        }
+        else
+        {
+            discardButton.GetComponentInChildren<Text>().text = MyResources.PASS_CARDS_BUTTON_TEXT;
         }
 
         CheckPosibleActions();
@@ -598,7 +705,7 @@ public class MainController : MonoBehaviour
             foreach (DPPanelController dpp in goals.DPPanels)
             {
                 DPCard dPCard = dpp.GetDP();
-            if ((dpp.colorType == card.colorType || card.colorType == Card.ColorType.GENERIC) && dpp.HasDP()){
+            if ((dpp.colorType == card.colorType || card.colorType == Card.ColorType.GENERIC) && dpp.HasDP() && !dpp.isInmune ){
                     dpp.HightLight();
             }
                 
@@ -614,7 +721,7 @@ public class MainController : MonoBehaviour
             foreach (DPPanelController dpp in goals.DPPanels)
             {
                
-                if ((dpp.colorType == card.colorType || card.colorType == Card.ColorType.GENERIC) && dpp.HasDP())
+            if ((dpp.colorType == card.colorType || card.colorType == Card.ColorType.GENERIC) && dpp.HasDP() && !dpp.isInmune)
                 {
                     dpp.HightLight();
                 }
@@ -643,8 +750,14 @@ public class MainController : MonoBehaviour
     void ResetDPPanels()
     {
         foreach (VSEGoals goals in VSEsGoals)
-            foreach (DPPanelController panel in goals.DPPanels)
+            foreach (DPPanelController panel in goals.DPPanels){
+                foreach(CardController cc in panel.GetCards()){
+                    cc.UnHighLight();
+                }
                 panel.UnHightLight();
+            }
+               
+        
     }
 
     void GetCards()

@@ -9,9 +9,11 @@ public class EVCard : Card {
 
     public EVCard(EventType newEventType){
         eventType = newEventType;
-
         viewcolor = MyResources.GENERIC_COLOR;
         icon = MyResources.EVENT_ICON;
+        font = MyResources.EV_TEXT_FONT;
+        subfont = MyResources.EV_SUBTEXT_FONT;
+
 
         switch(eventType){
 
@@ -29,7 +31,7 @@ public class EVCard : Card {
                 break;
             case EventType.SPI_EV:
                 textInfo = MyResources.EVENT_SOFTWARE_PROCESS_IMPROVEMENT;
-                textInfo = MyResources.EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB;
+                textSubInfo = MyResources.EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB;
                 break;
 
 
