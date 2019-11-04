@@ -128,6 +128,7 @@ No se hizo análisis inicial de requerimientos.
 
     public static float SHOW_MESSAGE_TIME = 1f;
 
+    public static float SCALE_FACTOR = 1.3f;
 
 
 

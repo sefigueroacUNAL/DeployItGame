@@ -75,7 +75,7 @@ public class Deck : MonoBehaviour {
         for (int i = 0; i < EventCardSPI; i++) cards.Add(new EVCard(EVCard.EventType.SPI_EV));
         for (int i = 0; i < EventCardsQSE; i++) cards.Add(new EVCard(EVCard.EventType.SW_QUALITY_EV));
         for (int i = 0; i < EventCardCompetitionBP; i++) cards.Add(new EVCard(EVCard.EventType.COMP_BP_EV));
-        for (int i = 0; i < EventCardsGoodEmployees; i++) cards.Add(new EVCard(EVCard.EventType.SW_QUALITY_EV));
+        for (int i = 0; i < EventCardsGoodEmployees; i++) cards.Add(new EVCard(EVCard.EventType.GOOD_EMP_EV));
 
 
 

@@ -6,13 +6,30 @@ using UnityEngine.UI;
 public class MainController : MonoBehaviour
 {
 
+    //Finit state machiness
     public enum State { INTRO, SET_GAME, PLAYING, FIRST_WIN, END }
 
+    //State machine for the game
     public enum PlayingState { NONE, SET_PLAYER, WAIT_ACTIONS, DO_ACIONS, GET_CARDS, NEXT_PLAYER };
+
+    //State machine when the card COM_BP_EV is played
+    public enum EventCompState { NONE, PLAYED, SELECTED_BP, GIVE_BP, FINISH };
+
+    //State machine when the card GOOD_EMPL_EV is played;
+    public enum EventGoodEmpState { NONE, PLAYED, SHOW_DP, GET_DP, FINISH};
+
+    //State machine when the card SW_QA_State is played
+    public enum EventSwQualityState { NONE, PLAYED, SHOW_DP, SELECT_DP, INTERCHANGE, FINISH };
 
     PlayingState playingState = PlayingState.NONE;
 
     State state = State.INTRO;
+
+    EventCompState eventCompState = EventCompState.NONE;
+
+    EventGoodEmpState eventGoodEmpState = EventGoodEmpState.NONE;
+
+    EventSwQualityState eventSwQualityState = EventSwQualityState.NONE;
 
     public int currentPlayer = 0;
 
@@ -27,6 +44,8 @@ public class MainController : MonoBehaviour
     public IntroScreen introScreen;
 
     public CardController currentCard;
+
+    public CardController eventLastBPCard;
 
     public List<CardController> selectedCards;
 
@@ -123,7 +142,6 @@ public class MainController : MonoBehaviour
                         Debug.Log("Card:" + card.colorType + " Added to hand:" + p);
                     }
 
-
                     hands.Add(hand);
                     VSEGoals vseGoals = Instantiate(prefabPanel, playersPanel).GetComponent<VSEGoals>();
                     vseGoals.SetName(vse);
@@ -132,7 +150,6 @@ public class MainController : MonoBehaviour
                     vseGoals.DPPanels[0].colorType = Card.ColorType.PM;
                     vseGoals.DPPanels[1].colorType = Card.ColorType.SI;
                     vseGoals.DPPanels[2].colorType = Card.ColorType.IT;
-
 
                 }
 
@@ -164,6 +181,11 @@ public class MainController : MonoBehaviour
             case PlayingState.SET_PLAYER:
                 //Load cards on current hand
                 totalCardsSelected = 0;
+
+                eventCompState = EventCompState.NONE;
+                eventGoodEmpState = EventGoodEmpState.NONE;
+                eventSwQualityState = EventSwQualityState.NONE;
+
                 handController.hand = hands[currentPlayer];
                 handController.SetGraphics();
 
@@ -189,6 +211,8 @@ public class MainController : MonoBehaviour
                 selectedCards.Clear();
                 ResetDPPanels();
                 playButton.interactable = false;
+
+
                 SetPlayingState(PlayingState.DO_ACIONS);
 
                 break;
@@ -198,7 +222,7 @@ public class MainController : MonoBehaviour
                 break;
 
             case PlayingState.GET_CARDS:
-
+                Debug.Log("We are in get cards state");
                 if(ThereIsWinner()){
                     
                     message.SetTitle(players[currentPlayer] + MyResources.WINNER_TITLE_SUFIX);
@@ -232,30 +256,123 @@ public class MainController : MonoBehaviour
 
     void OnPlayCardButtonClicked(){
 
-        message.SetTitle(MyResources.SPI_MESSAGE_TITLE);
-        message.SetText(MyResources.SPI_MESSAGE_TEXT);
-        message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
+       
 
         switch(currentEventType){
+            
             case EVCard.EventType.SPI_EV:
-                for (int i = 0; i < hands.Count; i++){
-                    if(i != currentPlayer){
-                        
-                        foreach(Card card in hands[i].cards){
-                            deck.disposedCards.Add(card);
-                        }
-                        hands[i].cards.Clear();
-                    }
-                }
+                ClearOtherPlayersHands();
+                SetPlayingState(PlayingState.GET_CARDS);
+                DisposeSelectedCards();
+                handController.SetGraphics();
+
+                message.SetTitle(MyResources.SPI_MESSAGE_TITLE);
+                message.SetText(MyResources.SPI_MESSAGE_TEXT);
+                message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
+
+                break;
+
+            case EVCard.EventType.COMP_BP_EV:
+                eventCompState = EventCompState.PLAYED;
+                HighLightPlayerBPs();
+                DisposeSelectedCards();
+                handController.SetGraphics();
+
+                message.SetTitle(MyResources.SPI_MESSAGE_TITLE);
+                message.SetText(MyResources.SPI_MESSAGE_TEXT);
+                message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
+                //Highlight all DP
+                break;
+
+            case EVCard.EventType.GOOD_EMP_EV:
+                eventGoodEmpState = EventGoodEmpState.PLAYED;
+                ShowMissingDPsInOthers();              
+                DisposeSelectedCards();
+                handController.SetGraphics();
+                break;
+
+            case EVCard.EventType.SW_QUALITY_EV:
+                eventSwQualityState = EventSwQualityState.PLAYED;
+                HighLightOtherPlayersDP();
+                DisposeSelectedCards();
+                handController.SetGraphics();
                 break;
             
         }
 
-        DisposeSelectedCards();
-
+       
+       
 
     }
 
+    void HighLightOtherPlayersDP(){
+        for (int i = 0; i < VSEsGoals.Count; i++){
+            if(i != currentPlayer){
+                foreach(DPPanelController dpp in VSEsGoals[i].DPPanels){
+                    if (!dpp.isInmune && dpp.HasDP()){
+                        dpp.HightLight();
+                    }
+                }
+            }
+        }
+    }
+
+    void HighLightPlayerBPs(){
+        foreach (DPPanelController dpp in VSEsGoals[currentPlayer].DPPanels){
+            if (dpp.GetBPs().Count > 0){
+                dpp.HightLight();
+            }
+        }
+    }
+
+    void ShowMissingDPsInOthers(){
+        for (int i = 0; i < VSEsGoals.Count; i++)
+        {
+            if (i != currentPlayer)
+            {
+                for (int j = 0; j < VSEsGoals[i].DPPanels.Length; j++){
+                    if( VSEsGoals[i].DPPanels[j].HasDP() && !VSEsGoals[currentPlayer].DPPanels[j].HasDP()){
+                        VSEsGoals[i].DPPanels[j].HightLight();
+                    }
+                }
+            }
+        }
+        
+    }
+
+    void GetDP(DPPanelController dpp){
+        DPCard dPCard = dpp.GetDP();
+        switch(dpp.colorType){
+            case Card.ColorType.PM:
+                foreach (CardController cc in dpp.GetCards()) 
+                    cc.transform.parent = VSEsGoals[currentPlayer].DPPanels[0].transform;
+                break;
+            case Card.ColorType.SI:
+                foreach (CardController cc in dpp.GetCards())
+                    cc.transform.parent = VSEsGoals[currentPlayer].DPPanels[1].transform;
+                break;
+            case Card.ColorType.IT:
+                foreach (CardController cc in dpp.GetCards())
+                    cc.transform.parent = VSEsGoals[currentPlayer].DPPanels[2].transform;
+                break;
+        }
+    }
+
+    void ClearOtherPlayersHands(){
+        for (int i = 0; i < hands.Count; i++)
+        {
+            if (i != currentPlayer)
+            {
+
+                foreach (Card card in hands[i].cards)
+                {
+                    deck.disposedCards.Add(card);
+
+                }
+                hands[i].cards.Clear();
+            }
+        }
+    }
 
     void DisposeSelectedCards(){
 
@@ -263,6 +380,7 @@ public class MainController : MonoBehaviour
             cc.transform.localScale = initCardScale;
             deck.disposedCards.Add((Card)cc.card.Clone());
             hands[currentPlayer].cards.Remove(cc.card);
+          
             cc.card = null;
         }
         
@@ -301,14 +419,60 @@ public class MainController : MonoBehaviour
         {
 
             case PlayingState.DO_ACIONS:
+
+                 
+               
                 if (dPPanel.isHighLight && !dPPanel.isInmune)
                 {
+                    
+                    if (eventCompState == EventCompState.PLAYED)
+                    {
+                        //The bpp already played
+                        List<CardController> bps = dPPanel.GetBPs();
+
+                        CardController cardController = dPPanel.GetBPs()[0];
+                        eventLastBPCard = cardController;
+                        BPCard bPCard = cardController.card as BPCard;
+                        cardController.HighLight();
+                        eventCompState = EventCompState.SELECTED_BP;
+                        ResetDPPanels();
+                        BPAction(bPCard);
+                        return;
+
+                        break;
+                    }
+
+                    if (eventCompState == EventCompState.SELECTED_BP)
+                    {
+
+                        //Add currentCard to dpp
+                        eventLastBPCard.transform.parent = dPPanel.transform;
+                        eventLastBPCard.UnHighLight();
+                        eventCompState = EventCompState.PLAYED;
+                        CheckPanel(dPPanel);
+                        ResetDPPanels();
+                        HighLightPlayerBPs();
+
+
+                        return;
+                        break;
+                    }
+
+                    if(eventGoodEmpState == EventGoodEmpState.PLAYED){
+                        
+                        GetDP(dPPanel);
+                        CheckPanel(dPPanel);
+                        eventGoodEmpState = EventGoodEmpState.NONE;
+                        SetPlayingState(PlayingState.GET_CARDS);
+                        return;
+                        break;
+                    }
+
                     foreach (CardController cc in selectedCards)
                     {
                         cc.selected = false;
                         cc.transform.localScale = initCardScale;
                         //cc.transform.parent = dPPanel.transform;
-
                         hands[currentPlayer].cards.Remove(cc.card);
 
                         CardController newCC = Instantiate(cc, dPPanel.transform);
@@ -458,36 +622,23 @@ public class MainController : MonoBehaviour
             }
     }
 
+
     void EVAction(Card card){
-
-
-
+        
 
         Debug.Log("Card is EVAction");
 
         EVCard eVCard = (EVCard)card;
 
-
-
+        currentEventType = eVCard.eventType;
 
         Debug.Log("Card is EVAction with Event:" + currentEventType);
 
-        switch(eVCard.eventType){
 
-            case EVCard.EventType.SPI_EV:
-                playButton.interactable = true;
-                break;
-            case EVCard.EventType.COMP_BP_EV:
-                 
-                break;
+        playButton.interactable = true;
 
-        }
+
     }
-
-  
-
-
-                            
 
     void ResetDPPanels()
     {

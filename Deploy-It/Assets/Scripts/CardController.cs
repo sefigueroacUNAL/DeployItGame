@@ -22,6 +22,8 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
     public bool selected = false;
     DPPanelController parent;
 
+    Vector3 initScale;
+
     public bool autoUpdate = false;
 
     delegate  void OnCardPointerEnter();
@@ -64,11 +66,25 @@ public class CardController : MonoBehaviour , IPointerEnterHandler {
         }
     }
 
+    public void HighLight(){
+
+        transform.localScale = 1.3f * initScale;
+        selected = true;
+        
+    }
+
+    public void UnHighLight(){
+        transform.localScale = initScale;
+        selected = false;
+    }
+
    
 
 
 	// Use this for initialization
 	void Start () {
+
+        initScale = transform.localScale;
 
         bgImage.onClick.AddListener(CardClicked);
 	}

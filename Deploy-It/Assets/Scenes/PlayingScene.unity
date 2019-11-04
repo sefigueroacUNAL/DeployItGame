@@ -1429,7 +1429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000027932265, y: 0.000009688727}
+  m_AnchoredPosition: {x: -0.000027932265, y: 0.000004547559}
   m_SizeDelta: {x: 0, y: 654.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &381392496
@@ -2343,7 +2343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.68350005, y: 0}
   m_AnchorMax: {x: 1, y: 0.739}
-  m_AnchoredPosition: {x: 0.16003418, y: 0.0025024414}
+  m_AnchoredPosition: {x: 0.16003418, y: 0.0024414062}
   m_SizeDelta: {x: -0.3, y: -0.0050049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &489789053
@@ -3066,9 +3066,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlayer: 0
+  currentEventType: 0
   handController: {fileID: 489789053}
   message: {fileID: 776991180}
-  smallMessage: {fileID: 0}
+  smallMessage: {fileID: 2041079352}
   introScreen: {fileID: 586133961}
   currentCard: {fileID: 461483460}
   selectedCards: []
@@ -3525,7 +3526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &776991179
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4404,7 +4405,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1943238556}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999998
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8840,7 +8841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.74244446}
   m_AnchorMax: {x: 0.63500005, y: 1}
-  m_AnchoredPosition: {x: -10.6, y: -1.8500366}
+  m_AnchoredPosition: {x: -10.599976, y: -1.8500366}
   m_SizeDelta: {x: -21.2, y: 3.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2041079352
