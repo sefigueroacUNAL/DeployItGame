@@ -12,6 +12,8 @@ public class Message : MonoBehaviour, IPointerClickHandler {
     public Text titleUI;
     public Text infoTextUI;
 
+    public UnityEvent MessageClosed;
+
 
     bool showed = true;
 
@@ -86,6 +88,9 @@ public class Message : MonoBehaviour, IPointerClickHandler {
 
         showed = false;
         Debug.Log("Hided Message");
+
+        MessageClosed.Invoke();
+        MessageClosed.RemoveAllListeners();
 
     }
 

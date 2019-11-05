@@ -278,7 +278,12 @@ public class MainController : MonoBehaviour
                 message.SetText(MyResources.SPI_MESSAGE_TEXT);
                 message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
 
-                SetPlayingState(PlayingState.GET_CARDS);
+                message.MessageClosed.AddListener(delegate {
+                
+                    SetPlayingState(PlayingState.GET_CARDS);
+                });
+
+               
 
                 break;
 
@@ -386,12 +391,16 @@ public class MainController : MonoBehaviour
 
 
     void CheckHands(){
+        int count = 0;
         foreach(Hand hand in hands){
             if(hand.cards.Count == 0){
                 message.SetTitle(MyResources.NO_MORE_CARDS_TITLE);
                 message.SetText(MyResources.NO_MORE_CARDS_TEXT);
-                SetState(State.INTRO);
+                count++;
             }
+        }
+        if(count == players.Count){
+            SetState(State.INTRO);
         }
     }
 
