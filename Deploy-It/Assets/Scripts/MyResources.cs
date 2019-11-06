@@ -28,70 +28,70 @@ public class MyResources : MonoBehaviour{
         + "The next step for your VSE is to accomplish the Deployment Packages for the Basic Profile.";
 
 
-    public static string NO_PLAYERS_SELECTED = "You have not setted the players";
-    public static string NO_PLAYERS_SELECTED_INFO = "You should set at least two VSE's.\n\nCheck the VSE that you want to select and write their names.";
+    public static string NO_PLAYERS_SELECTED = "You have not signed in VSEs";
+    public static string NO_PLAYERS_SELECTED_INFO = "You should signed at least two VSE's.\n\nCheck the VSE that you want to select and write their names.";
 
-    public static string GAME_WILL_START = "Game will start";
-    public static string GAME_WILL_START_SUB = "The game is about to start";
+    public static string GAME_WILL_START = "Implementation of ISO/IEC 29110 will start";
+    public static string GAME_WILL_START_SUB = "The implementation will be done through Deployment Packages";
 
     public static string DP_TEXT = "Deployment Package";
     public static string GP_TEXT = "Good Practice";
     public static string BP_TEXT = "Bad Practice";
-    public static string EVENT_TEXT = "Event";
+    public static string EVENT_TEXT = "Internal Strategy";
 
 
     public static string DP_PM_TEXT = "Project Management Process";
     public static string DP_IT_TEXT = "Highly Iterative Software Process";
-    public static string DP_GENERIC_TEXT = "Generic DP";
+    public static string DP_GENERIC_TEXT = "New Deployment Package Strategy";
     public static string DP_SI_TEXT = "Software Implementation Process";
 
-    public static string NO_MORE_CARDS_TITLE = "Game is over";
+    public static string NO_MORE_CARDS_TITLE = "VSE's are broken.";
 
-    public static string NO_MORE_CARDS_TEXT =  "There are not more cards in the deck.";
+    public static string NO_MORE_CARDS_TEXT =  "There are not more strategies to implement";
 
     public static string GP_PM_TEXT = 
         
-@"- Planeación.
-- Ejecución de la planeación.
-- Evaluación y control.
-- Cierre del proyecto.
+@"- Planning.
+- Plan execution.
+- Assesment and Control.
+- Project Closure.
 ";
     public static string GP_IT_TEXT = 
-@"- Fase de prueba de concepto
-- Fase de producción
-- Fase de posproducción
+@"- Proof of concept phase.
+- Production phase.
+- Posproduction phase.
 ";
 
     public static string GP_SI_TEXT = 
-@"Inicio de implementación
-Análisis de requerimientos.
-Identificación de componentes.
-Construcción de software
-Tests de integración
-Entrega del producto
+@"- Software Init
+- Requirements analysis.
+- Component Identification.
+- Software Construction
+- Integration and tests
+- Producto delivery
 ";
 
     public static string GP_GENERIC_TEXT = 
-@"El proceso está bien";
+@"Documentation";
 
     public static string BP_PM_TEXT = 
-@"Mala planeación del proyecto.
-Mal control de control de cambios";
+@"Wron correct planning.
+No control of changes";
 
     public static string BP_SI_TEXT = 
-@"No se hizo documento de requisitos.
-No se guardaron registros de tests.
-La arquitectura no responde a todos los requisitos.
-No se entregó manual de producto.
+@"No requirements document.
+Test not documented.
+Architecture doesnot fullfill requirements.
+Manual of products was not delivered.
 ";
     public static string BP_IT_TEXT = 
-@"La iteración fue caótica.
-No se realizó prueba de concepto de planeación
-No se hizo análisis inicial de requerimientos.
+@"Iteration was cahotic
+No proof of concept planning.
+No initial requirement analysis document.
 ";
 
 
-    public static string BP_GENERIC_TEXT = @"Algo no está bien";
+    public static string BP_GENERIC_TEXT = @"Incomplete Processes";
 
     public static string EVENT_SW_QUALITY_EVENTS = "Software Quality Events";
     public static string EVENT_SW_QUALITY_EVENTS_SUB = "Interchage DP";
@@ -105,11 +105,11 @@ No se hizo análisis inicial de requerimientos.
     public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT = "Software process Improvemet";
     public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB = "You are one step ahead. Other VSE may change discart their cards";
 
-    public static string GET_CARDS_BUTTON_TEXT = "Get Cards";
-    public static string PASS_CARDS_BUTTON_TEXT = "Pass";
+    public static string GET_CARDS_BUTTON_TEXT = "Renew plan";
+    public static string PASS_CARDS_BUTTON_TEXT = "Wait next Year";
     public static string DISCARD_BUTTON_TEXT = "Discard";
-    public static string YOU_HAVE_NOT_CARDS_TITLE = "You have no cards.";
-    public static string YOU_HAVE_NOT_CARDS_ACTION = "Click on get Cards";
+    public static string YOU_HAVE_NOT_CARDS_TITLE = "You have strategies.";
+    public static string YOU_HAVE_NOT_CARDS_ACTION = "Renew your plan.";
 
     public static string SPI_MESSAGE_TITLE = "You are one step ahead.";
     public static string SPI_MESSAGE_TEXT = "Other VSE's need more strategies";

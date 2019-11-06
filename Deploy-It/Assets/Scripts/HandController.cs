@@ -34,7 +34,7 @@ public class HandController : MonoBehaviour {
     }
 
     public void SetName(string name){
-        handName.text = name + " Hand";
+        handName.text = name + " strategic plan";
     }
 	// Use this for initialization
 	void Start () {

@@ -1,8 +1,8 @@
-Android
+WindowsStandalone
 PlayerPath?
-/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V1ANDROID.apk
+/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V2/V2.exe
 SceneListBegin?
-Assets/Scenes/PlayingSceneV2.unity
+Assets/Scenes/PlayingSceneV3.unity
 SceneListEnd?
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cf455f7a806648c6ed4c7d3e3f8a0e03 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -219,7 +219,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MyResources
-3a5f2b8ad87f99c2188451c77e7f7587 Assembly-CSharp.dll:.Message
+be767474eaf299d01a9244badd7ebc4d Assembly-CSharp.dll:.Message
 52ea1164565415c8c87f991203a2c13a Assembly-CSharp.dll:.VSEGoals
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.EventCard
 e94edc09e5935f2753c2e24e9d625706 Assembly-CSharp.dll:.GenerateDeck
