@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{2CEA585A-CDE5-40EF-9A90-9765C31683A3}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyResources.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainController.cs">
     <Files>
       <File FileName="Assets/Scripts/CardController.cs" Line="57" Column="46" />
       <File FileName="Assets/Scripts/Card.cs" Line="18" Column="24" />
