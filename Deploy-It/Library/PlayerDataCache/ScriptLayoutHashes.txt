@@ -1,6 +1,6 @@
-WindowsStandalone
+OSXStandalone
 PlayerPath?
-/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V2/V2.exe
+/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V3MAC.app
 SceneListBegin?
 Assets/Scenes/PlayingSceneV3.unity
 SceneListEnd?

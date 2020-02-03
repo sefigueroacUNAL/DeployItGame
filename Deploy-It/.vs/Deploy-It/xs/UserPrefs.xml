@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{2CEA585A-CDE5-40EF-9A90-9765C31683A3}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MyResources.cs">
     <Files>
       <File FileName="Assets/Scripts/CardController.cs" Line="57" Column="46" />
       <File FileName="Assets/Scripts/Card.cs" Line="18" Column="24" />
       <File FileName="Assets/Scripts/DPCard.cs" Line="23" Column="8" />
-      <File FileName="Assets/Scripts/MyResources.cs" Line="114" Column="30" />
+      <File FileName="Assets/Scripts/MyResources.cs" Line="78" Column="8" />
       <File FileName="Assets/Scripts/BPCard.cs" Line="13" Column="39" />
       <File FileName="Assets/Scripts/GPCard.cs" Line="12" Column="6" />
       <File FileName="Assets/Scripts/GenerateDeck.cs" Line="29" Column="16" />
@@ -13,10 +13,10 @@
       <File FileName="Assets/Scripts/EVCard.cs" Line="34" Column="28" />
       <File FileName="Assets/Scripts/VSEGoals.cs" Line="48" Column="56" />
       <File FileName="Assets/Scripts/Hand.cs" Line="14" Column="6" />
-      <File FileName="Assets/Scripts/HandController.cs" Line="39" Column="29" />
+      <File FileName="Assets/Scripts/HandController.cs" Line="37" Column="48" />
       <File FileName="Assets/Scripts/Utils.cs" Line="17" Column="6" />
       <File FileName="Assets/Scripts/DPPanelController.cs" Line="73" Column="5" />
-      <File FileName="Assets/Scripts/MainController.cs" Line="284" Column="19" />
+      <File FileName="Assets/Scripts/MainController.cs" Line="436" Column="19" />
       <File FileName="Assets/Scripts/Message.cs" Line="15" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>

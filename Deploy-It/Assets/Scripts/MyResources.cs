@@ -75,7 +75,7 @@ public class MyResources : MonoBehaviour{
 @"Documentation";
 
     public static string BP_PM_TEXT = 
-@"Wron correct planning.
+@"Wrong correct planning.
 No control of changes";
 
     public static string BP_SI_TEXT = 
@@ -96,19 +96,19 @@ No initial requirement analysis document.
     public static string EVENT_SW_QUALITY_EVENTS = "Software Quality Events";
     public static string EVENT_SW_QUALITY_EVENTS_SUB = "Interchage DP";
 
-    public static string EVENT_ATTRACT_GOOD_EMPLOYEES = "Attract Good Employees";
-    public static string EVENT_ATTRACT_GOOD_EMPLOYEES_SUB = "Get DP from the others VSE";
+    public static string EVENT_ATTRACT_GOOD_EMPLOYEES = "Human Talent Managemente";
+    public static string EVENT_ATTRACT_GOOD_EMPLOYEES_SUB = "Get DP/employee from the others VSE";
 
     public static string EVENT_COMPETITION_BAD_PRACTICES = "Competitions Adopts Bad Practices";
     public static string EVENT_COMPETITION_BAD_PRACTICES_SUB = "Bad practices for the others.";
 
     public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT = "Software process Improvemet";
-    public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB = "You are one step ahead. Other VSE may change discart their cards";
+    public static string EVENT_SOFTWARE_PROCESS_IMPROVEMENT_SUB = "Your VSE is one step ahead. Other VSE's need to renew strategic plan";
 
     public static string GET_CARDS_BUTTON_TEXT = "Renew plan";
     public static string PASS_CARDS_BUTTON_TEXT = "Wait next Year";
-    public static string DISCARD_BUTTON_TEXT = "Discard";
-    public static string YOU_HAVE_NOT_CARDS_TITLE = "You have strategies.";
+    public static string DISCARD_BUTTON_TEXT = "More planning";
+    public static string YOU_HAVE_NOT_CARDS_TITLE = "You have not strategies.";
     public static string YOU_HAVE_NOT_CARDS_ACTION = "Renew your plan.";
 
     public static string SPI_MESSAGE_TITLE = "You are one step ahead.";

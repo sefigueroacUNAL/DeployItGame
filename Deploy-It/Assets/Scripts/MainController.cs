@@ -201,7 +201,7 @@ public class MainController : MonoBehaviour
                 if(hands[currentPlayer].cards.Count == 0){
                     
                     discardButton.GetComponentInChildren<Text>().text = MyResources.GET_CARDS_BUTTON_TEXT;
-                    message.SetTitle(MyResources.YOU_HAVE_NOT_CARDS_TITLE);
+                    message.SetTitle(players[currentPlayer] + ", " + MyResources.YOU_HAVE_NOT_CARDS_TITLE);
                     message.SetText(MyResources.YOU_HAVE_NOT_CARDS_ACTION);
                     message.ShowMessageTime(MyResources.SHOW_MESSAGE_TIME);
 
@@ -435,14 +435,17 @@ public class MainController : MonoBehaviour
 
     void OnDiscard()
     {
-        Debug.Log("Discarded Cards");
-        foreach (CardController cc in selectedCards)
-        {
-            hands[currentPlayer].cards.Remove(cc.card);
-            deck.disposedCards.Add(cc.card);
-        }
+        
         if (playingState == PlayingState.DO_ACIONS)
         {
+
+            Debug.Log("Discarded Cards");
+            foreach (CardController cc in selectedCards)
+            {
+                hands[currentPlayer].cards.Remove(cc.card);
+                deck.disposedCards.Add(cc.card);
+            }
+
             SetPlayingState(PlayingState.GET_CARDS);
         }
 
