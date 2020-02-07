@@ -7,7 +7,7 @@ public class MainController : MonoBehaviour
 {
 
     //Finit state machiness
-    public enum State { INTRO, SET_GAME, PLAYING, FIRST_WIN, END }
+    public enum State { INTRO, TUTORIAL, SET_GAME, PLAYING, FIRST_WIN, END }
 
     //State machine for the game
     public enum PlayingState { NONE, SET_PLAYER, WAIT_ACTIONS, DO_ACIONS, GET_CARDS, NEXT_PLAYER };
@@ -42,6 +42,8 @@ public class MainController : MonoBehaviour
     public Message smallMessage;
 
     public IntroScreen introScreen;
+
+    public TutorialScript tutorialScreen;
 
     public CardController currentCard;
 
@@ -106,13 +108,21 @@ public class MainController : MonoBehaviour
         switch (newState)
         {
             case State.INTRO:
+                tutorialScreen.gameObject.SetActive(false);
                 introScreen.gameObject.SetActive(true);
+
 
                 foreach(VSEGoals goals in VSEsGoals){
                     Destroy(goals.gameObject);
                 }
 
                 SetPlayingState(PlayingState.NONE);
+                break;
+
+            case State.TUTORIAL:
+                
+                tutorialScreen.gameObject.SetActive(true);
+
                 break;
 
 
@@ -251,6 +261,10 @@ public class MainController : MonoBehaviour
 
         }
 
+    }
+
+    void OnTutorialEnded(){
+        SetState(State.SET_GAME);
     }
 
     //EVENTS 
@@ -427,7 +441,7 @@ public class MainController : MonoBehaviour
         Debug.Log("Game has started with players:" + newPlayers);
         players = newPlayers;
 
-        SetState(State.SET_GAME); //When checkstate is not on update this must be the last instrucion;
+        SetState(State.TUTORIAL); //When checkstate is not on update this must be the last instrucion;
 
         discardButton.onClick.AddListener(OnDiscard);
 
@@ -886,6 +900,7 @@ public class MainController : MonoBehaviour
 
         message.gameObject.SetActive(true);
         smallMessage.gameObject.SetActive(true);
+        tutorialScreen.gameObject.SetActive(false);
         smallMessage.HideMessage(0f);
 
 

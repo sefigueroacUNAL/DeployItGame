@@ -1,6 +1,6 @@
 OSXStandalone
 PlayerPath?
-/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V3MAC.app
+/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V3MAC/V3MAC.app
 SceneListBegin?
 Assets/Scenes/PlayingSceneV3.unity
 SceneListEnd?
@@ -206,7 +206,7 @@ f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTool
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
-14aca97b0de855a28ddd24559cc01eee Assembly-CSharp.dll:.MainController
+7ecd596e73d252677ce45f544c3b28fa Assembly-CSharp.dll:.MainController
 5bddd894dba049f0695f7f559e361402 Assembly-CSharp.dll:.IntroScreen
 9e0ef5bf862444b5dc48b5a99554ce7c UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
@@ -289,3 +289,4 @@ a924c90a95cf65003f662aa5e30abb6b Vuforia.UnityExtensions.dll:Vuforia.VuforiaConf
 01e6f145049f3a676df6dc247eabf176 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehaviour
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
+4f119fd0d5bfa40db97a4572feeb225e Assembly-CSharp.dll:.TutorialScript
