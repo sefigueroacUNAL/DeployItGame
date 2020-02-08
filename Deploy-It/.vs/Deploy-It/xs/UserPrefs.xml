@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{2CEA585A-CDE5-40EF-9A90-9765C31683A3}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/IntroScreen.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/TutorialScript.cs">
     <Files>
       <File FileName="Assets/Scripts/CardController.cs" Line="57" Column="46" />
       <File FileName="Assets/Scripts/Card.cs" Line="18" Column="24" />
@@ -16,9 +16,9 @@
       <File FileName="Assets/Scripts/HandController.cs" Line="37" Column="48" />
       <File FileName="Assets/Scripts/Utils.cs" Line="17" Column="6" />
       <File FileName="Assets/Scripts/DPPanelController.cs" Line="45" Column="2" />
-      <File FileName="Assets/Scripts/MainController.cs" Line="86" Column="14" />
+      <File FileName="Assets/Scripts/MainController.cs" Line="444" Column="32" />
       <File FileName="Assets/Scripts/Message.cs" Line="15" Column="12" />
-      <File FileName="Assets/TutorialScript.cs" Line="58" Column="26" />
+      <File FileName="Assets/TutorialScript.cs" Line="66" Column="20" />
       <File FileName="Assets/Scripts/IntroScreen.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>

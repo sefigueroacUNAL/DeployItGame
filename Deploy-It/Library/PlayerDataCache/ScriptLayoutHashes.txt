@@ -1,6 +1,6 @@
-OSXStandalone
+WindowsStandalone
 PlayerPath?
-/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/V3MAC/V3MAC.app
+/Users/SFIGUEROA90/Documents/UnityProjects/DeployItGame/Builds/DeployIt/DeployIt/DeployIt.exe
 SceneListBegin?
 Assets/Scenes/PlayingSceneV3.unity
 SceneListEnd?
@@ -217,6 +217,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
+4f119fd0d5bfa40db97a4572feeb225e Assembly-CSharp.dll:.TutorialScript
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.MyResources
 be767474eaf299d01a9244badd7ebc4d Assembly-CSharp.dll:.Message
@@ -289,4 +290,3 @@ a924c90a95cf65003f662aa5e30abb6b Vuforia.UnityExtensions.dll:Vuforia.VuforiaConf
 01e6f145049f3a676df6dc247eabf176 Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehaviour
 3d1b89310e77c34bc0c8d7132231345c Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 05524b8f659e7bfe5756d1335fec24ba Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
-4f119fd0d5bfa40db97a4572feeb225e Assembly-CSharp.dll:.TutorialScript
